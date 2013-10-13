@@ -23,7 +23,7 @@ var func = function(){
 
     	case 'product' :
     		return {
-    			, port : '8080'
+    			port : '8080'
     		};
 
     	default:
