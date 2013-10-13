@@ -9,8 +9,9 @@ $(function(){
 
       var itemId = "item" + itemNum;
       var dataId = "data" + itemNum;
+      var strip = itemNum % 2 == 0 ? "gray" : "white"
 
-      $("#mylist").append("<p class='item' id='" + itemId+"'><b>" + item + "</b></p>");
+      $("#mylist").append("<p class='item " + strip +"' id='" + itemId+"'><b>" + item + "</b></p>");
       
 
       //do the query to get promotion
@@ -20,16 +21,22 @@ $(function(){
           
           $("#data").append("<div id='" + dataId + "'>");
           data.promotions.forEach(function(promotion){
-              $("#"+dataId).append( "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>" + promotion.supplier + ":&nbsp;&nbsp;</i>" + promotion.content + "</p>" );
+              $("#"+dataId).append( "<p><i>" + promotion.supplier + ":&nbsp;&nbsp;</i>" + promotion.content + "</p>" );
           });
           //append show promotion to the item
-          $("#"+itemId).append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='showPromotion' href='#'><img style='width: 2%; height: 2%' src='/image/sale.png'></a>"); 
+          $("#"+itemId).append("<a class='showPromotion' href='#'><img src='/image/sale.png'></a>"); 
       });
       itemNum++;
    });
 
+  $(document).on('click', '.showPromotion', function(){
+    var itemId = this.parentElement.attributes["id"].value;
+    var dataId = itemId.replace("item", "data");
+    $("#dialog-modal").html($("#"+dataId).html());
+    $( "#dialog-modal" ).dialog({
+      height: 240,
+      modal: true
+    });
+  })
 
-   $(".showPromotion").click(function(event){
-       alert('clicked');
-   })
 });
