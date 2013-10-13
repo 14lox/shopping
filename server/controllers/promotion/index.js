@@ -16,7 +16,7 @@ exports.post_query = function(req, res, next){
 		async.map(result.matches, getPromotionContent, function(err,results){
 			console.log('-----------')
 			console.log(results);	
-			res.send(results);	
+			res.send({item: query, promotions: results});	
 		});
 	});
 }

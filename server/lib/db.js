@@ -22,8 +22,8 @@ function Db(){
                 } else {
                     deferred.resolve(result);
                 }
-                connection.release();
             });
+            connection.release();
         });
 
         return deferred.promise;
