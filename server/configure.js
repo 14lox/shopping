@@ -23,13 +23,7 @@ var func = function(){
 
     	case 'product' :
     		return {
-    			fb: {
-    				appId: '294012080740019'
-  					, appSecret: '6415e225774416988a5ce5d2a6bf822d'
-				}
-    			, database: 'mongodb://127.0.0.1/habitized'
-    			, cookieSecret: '342kfsdakj'
-    			, port : '80'
+    			, port : '8080'
     		};
 
     	default:
