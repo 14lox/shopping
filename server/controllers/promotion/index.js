@@ -15,7 +15,7 @@ exports.post_query = function(req, res, next){
 	cl.Query(query, function(err, result) {
 		async.map(result.matches, getPromotionContent, function(err,results){
 			console.log('-----------')
-			console.log(results);	
+			//console.log(results);	
 			res.send({item: query, promotions: results});	
 		});
 	});
@@ -23,10 +23,14 @@ exports.post_query = function(req, res, next){
 
 getPromotionContent = function(match,callback){
 	console.log(match);
-	var query = 'SELECT content from Current where id = ' + match.id;
+	var query = 'SELECT name, newPrice, oldPrice, save from Current where id = ' + match.id;
 	Db.runQuery(query)
 	.then(function(result){
-		callback(null,{"supplier": helper.getSupplier(match.attrs.supplierid), "content":result[0].content});
+		callback(null,{"supplier" : helper.getSupplier(match.attrs.supplierid), 
+						"name" : result[0].name,
+						"newPrice" : result[0].newPrice,
+						"oldPrice" : result[0].oldPrice,
+						"save" : result[0].save});
 	})
 	.done();
 
