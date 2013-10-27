@@ -1,4 +1,8 @@
 <input type="text" id="item" ng-model='newItem' required ng-trim='true'></input>
 <a href="" ng-click="addItem()">Add Item</a>
 <ul>
-<li ng-repeat="item in list">{{item["name"]}} <a ngIf={{item["save"]}} href='#/items/{{item["name"]}}'>show savings</a></li>
+<li ng-repeat="item in list">{{item["name"]}} 
+	<a ng-if='item["save"]' href='#/items/{{item["name"]}}'>show savings </a>
+	<a href='' ng-click='removeItem(item["name"])'> remove </a>
+</li>
+</ul>

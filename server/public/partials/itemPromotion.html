@@ -1,1 +1,23 @@
-<div> this is the promotion </div>
+<a href='#/mylist'>back</a> 
+<ul>
+<li ng-repeat="item in list">
+<table>
+	<tr>
+		<td>
+			{{item["supplier"]}}
+		</td>
+		<td>
+			{{item["name"]}}
+		</td>
+		<td>
+			{{item["newPrice"]}}
+		</td>
+		<td>
+			{{item["oldPrice"]}}
+		</td>
+		<td>
+			save {{item["save"]}}%
+		</td>
+
+ </li>
+</ul>

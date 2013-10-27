@@ -8,6 +8,7 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '_',
   function MyListCtrl($scope, $http) {
 
     $scope.list = [];
+    $scope.query = '';
 
     $scope.addItem = function(){
       if($scope.newItem == '' || $scope.newItem == undefined)
@@ -16,43 +17,72 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '_',
       if(_.some($scope.list, function(item){
         return item.name == $scope.newItem;
       })){
-         alert("item already exists in the list");
-          return;
-      }
+       alert("item already exists in the list");
+       return;
+     }
 
-      $scope.list.push({name:$scope.newItem, save:false});
+     $scope.list.push({name:$scope.newItem, save:false});
+
+     //reset newItem so the html input is cleared
+     $scope.query = $scope.newItem;
+     $scope.newItem = '';
 
       //set local storage
-      localStorage.setItem($scope.newItem, undefined);
+      localStorage.setItem($scope.query.itemlize(), undefined);
 
-      $http.post('/promotion/post_query', {query: $scope.newItem}).success(successCallback);
-
+      $http.post('/promotion/post_query', {query: $scope.query}).success(successCallback);
     };
 
-	var	successCallback = function(data){
+    $scope.removeItem = function(item){
+      var obj = _.find($scope.list, function(element){
+        return element.name == item;
+      });
+      var idx = _.indexOf($scope.list, obj);
+      $scope.list.splice(idx, 1);
+
+      //set local storage
+      localStorage.removeItem(item.itemlize());
+    };
+
+    var	successCallback = function(data){
     	if(data.promotions.length == 0) return;
 
       var target = _.find($scope.list, function(item){
-        return item.name == $scope.newItem;
+        return item.name == $scope.query;
       });
       target.save = true;
-      localStorage.setItem($scope.newItem, JSON.stringify(data));
-
-          //data.promotions.forEach(function(promotion){
-          //	$scope.list.push(promotion.name);
-              //$("#"+dataId).append( "<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>" + promotion.supplier + ":&nbsp;&nbsp;</i>" + promotion.content + "</p>" );
-          //});
-          //append show promotion to the item
-          //$("#"+itemId).append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class='showPromotion' href='#'><img style='width: 2%; height: 2%' src='/image/sale.png'></a>"); 
+      localStorage.setItem($scope.query.itemlize(), JSON.stringify(data));
 
     };
 
-    
 
-    
-  }]);
+    var init = function () {
+      for(var obj in window.localStorage){
+        if(obj.isItem())
+        {
+          var saving = localStorage[obj];
+          if(saving == 'undefined'){
+            $scope.list.push({name:obj.deItemlize(), save: false});
+          }else{
+            $scope.list.push({name:obj.deItemlize(), save: true});
+          }
+        }
+      }
+    };
+      // and fire it after definition
+      init(); 
+
+    }]);
 
 shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParams',
   function($scope, $routeParams) {
-    //$scope.phoneId = $routeParams.phoneId;
+    $scope.item = $routeParams.itemId.itemlize();
+    $scope.list = [];
+    
+    var init = function(){
+      var obj = JSON.parse(localStorage[$scope.item]);
+      $scope.list = obj['promotions'];
+    };
+
+    init();
   }]);
