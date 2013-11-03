@@ -29,22 +29,32 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '_',
      $scope.newItem = '';
 
       //set local storage
-      localStorage.setItem($scope.query.itemlize(), {order: ++itemOrder, date:new Date()});
+      var dataStr = JSON.stringify({order: ++itemOrder, date:new Date()})
+      localStorage.setItem($scope.query.itemlize(), dataStr);
 
       $http.post('/promotion/post_query', {query: $scope.query}).success(successCallback);
     };
 
-    $scope.removeItem = function(item){
+    var currentItem;
+    $scope.setCurrentItem = function(item){
+      currentItem = item;
+    }
+    
+    $scope.removeItem = function(){
       var obj = _.find($scope.list, function(element){
-        return element.name == item;
+        return element.name == currentItem;
       });
       var idx = _.indexOf($scope.list, obj);
       //remove from list
       $scope.list.splice(idx, 1);
 
       //set local storage
-      localStorage.removeItem(item.itemlize());
+      localStorage.removeItem(currentItem.itemlize());
+      $scope.hide();
     };
+
+    
+
 
     var	successCallback = function(data){
     	if(data.promotions.length == 0) return;
@@ -55,29 +65,32 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '_',
       });
       target.save = true;
 
-      localStorage[$scope.query.itemlize()].saving = data.promotions;
+      var obj = JSON.parse(localStorage[$scope.query.itemlize()]);
+      obj.saving = data.promotions;
 
-      //var savingDatails = JSON.stringify(data);
-      
-      //localStorage.setItem($scope.query.itemlize(), savingDatails);
+      localStorage.setItem($scope.query.itemlize(), JSON.stringify(obj));
     };
+
+
 
 
     var init = function () {
       for(var obj in window.localStorage){
         if(obj.isItem())
         {
-          var saving = localStorage[obj].saving;
-          if(saving == 'undefined'){
-            $scope.list.push({name:obj.deItemlize(), save: false});
+          var storageObj = JSON.parse(localStorage[obj]);
+          var saving = storageObj.saving;
+          var order = storageObj.order;
+          if(saving == undefined){
+            $scope.list.push({name:obj.deItemlize(), save: false, order: order});
           }else{
-            $scope.list.push({name:obj.deItemlize(), save: true});
+            $scope.list.push({name:obj.deItemlize(), save: true, order: order});
           }
           //get the max item order
-          if(itemOrder < obj.itemOrder) itemOrder = obj.itemOrder;
+          if(itemOrder < order) itemOrder = order;
         }
       }
-      _.sortBy($scope.list, function(item){return item.itemOrder});
+      $scope.list = _.sortBy($scope.list, function(item){return item.order});
     };
       // and fire it after definition
       init(); 
@@ -91,7 +104,7 @@ shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParam
     
     var init = function(){
       var obj = JSON.parse(localStorage[$scope.item]);
-      $scope.list = obj['promotions'];
+      $scope.list = obj.saving;
     };
 
     init();

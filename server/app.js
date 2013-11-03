@@ -21,7 +21,6 @@ app.set('port', config.port || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.engine('ejs', require('ejs-locals'));
-//app.use(express.favicon(__dirname + '/public/image/favicon.ico'));
 app.use(express.logger('dev'));
 app.use(express.cookieParser(config.cookieSecret));
 app.use(express.session())
