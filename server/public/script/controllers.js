@@ -9,6 +9,7 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '_',
 
     $scope.list = [];
     $scope.query = '';
+    var itemOrder = 0;
 
     $scope.addItem = function(){
       if($scope.newItem == '' || $scope.newItem == undefined)
@@ -28,7 +29,7 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '_',
      $scope.newItem = '';
 
       //set local storage
-      localStorage.setItem($scope.query.itemlize(), undefined);
+      localStorage.setItem($scope.query.itemlize(), {order: ++itemOrder, date:new Date()});
 
       $http.post('/promotion/post_query', {query: $scope.query}).success(successCallback);
     };
@@ -38,6 +39,7 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '_',
         return element.name == item;
       });
       var idx = _.indexOf($scope.list, obj);
+      //remove from list
       $scope.list.splice(idx, 1);
 
       //set local storage
@@ -47,12 +49,17 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '_',
     var	successCallback = function(data){
     	if(data.promotions.length == 0) return;
 
+      //set the list item with saving: true
       var target = _.find($scope.list, function(item){
         return item.name == $scope.query;
       });
       target.save = true;
-      localStorage.setItem($scope.query.itemlize(), JSON.stringify(data));
 
+      localStorage[$scope.query.itemlize()].saving = data.promotions;
+
+      //var savingDatails = JSON.stringify(data);
+      
+      //localStorage.setItem($scope.query.itemlize(), savingDatails);
     };
 
 
@@ -60,14 +67,17 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '_',
       for(var obj in window.localStorage){
         if(obj.isItem())
         {
-          var saving = localStorage[obj];
+          var saving = localStorage[obj].saving;
           if(saving == 'undefined'){
             $scope.list.push({name:obj.deItemlize(), save: false});
           }else{
             $scope.list.push({name:obj.deItemlize(), save: true});
           }
+          //get the max item order
+          if(itemOrder < obj.itemOrder) itemOrder = obj.itemOrder;
         }
       }
+      _.sortBy($scope.list, function(item){return item.itemOrder});
     };
       // and fire it after definition
       init(); 
