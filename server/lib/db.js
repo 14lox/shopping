@@ -16,14 +16,20 @@ function Db(){
     Db.prototype.runQuery = function(query){
         var deferred = Q.defer();
         pool.getConnection(function(err, connection) {
-            connection.query( query, function(err, result) {
-                if (err) {
-                    deferred.reject(new Error(err));
-                } else {
-                    deferred.resolve(result);
-                }
-            });
+            if(err){
+              console.log(err);
+              deferred.reject(new Error(err));
+            }
+            else{
+              connection.query( query, function(err, result) {
+                  if (err) {
+                      deferred.reject(new Error(err));
+                  } else {
+                      deferred.resolve(result);
+                  }
+              });
             connection.release();
+            }
         });
 
         return deferred.promise;

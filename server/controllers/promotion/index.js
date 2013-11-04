@@ -19,15 +19,15 @@ exports.post_query = function(req, res, next){
 }
 
 getPromotionContent = function(match,callback){
-	console.log(match);
-	var query = 'SELECT name, newPrice, oldPrice, save from Current where id = ' + match.id;
+	var query = 'SELECT name, newPrice, oldPrice, save, img from Current where id = ' + match.id;
 	Db.runQuery(query)
 	.then(function(result){
 		callback(null,{"supplier" : helper.getSupplier(match.attrs.supplierid), 
 						"name" : result[0].name,
 						"newPrice" : result[0].newPrice,
 						"oldPrice" : result[0].oldPrice,
-						"save" : result[0].save});
+						"save" : result[0].save,
+						"img" : result[0].img});
 	})
 	.done();
 

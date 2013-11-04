@@ -1,9 +1,17 @@
-<input type="text" id="item" ng-model='newItem' required ng-trim='true'></input>
-<a href="" ng-click="addItem()">Add Item</a>
-<ul>
-<li ng-repeat="item in list">
+<div class="wrap">
+	<div class="header">
+		<input type="text" id="item" ng-model='newItem' required ng-trim='true'></input>
+		<a href="" ng-click="addItem()"><i class="fa fa-plus-circle"></i></a>
+		<a id='config' href="config"><i class="fa fa-wrench"></i></a>
+	</div>
+	<div class="wrap-list">
+		<ol class="list">
+			<li ng-repeat="item in list"> 
 	<a href='' data-unique="1" bs-popover="'/partials/context_menu.html'" ng-click="setCurrentItem(item['name'])">{{item["name"]}}</a>
 
-	<a ng-if='item["save"]' href='#/items/{{item["name"]}}'>show savings </a>
-</li>
-</ul>
+					<a ng-if='item["save"]' href='#/items/{{item["name"]}}'><i class="fa fa-gift"></i> </a>
+				</li>
+			</ol>
+		</div>
+	</div>
+</div>
