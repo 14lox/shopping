@@ -1,23 +1,31 @@
-<a href='#/mylist'>back</a> 
-<ul>
-<li ng-repeat="item in list">
-<table>
-	<tr>
-		<td>
-			{{item["supplier"]}}
-		</td>
-		<td>
-			{{item["name"]}}
-		</td>
-		<td>
-			{{item["newPrice"]}}
-		</td>
-		<td>
-			{{item["oldPrice"]}}
-		</td>
-		<td>
-			save {{item["save"]}}%
-		</td>
-
- </li>
-</ul>
+<div class="wrap">
+	<div class="header">
+		<a href='#/mylist'><i class="fa fa-long-arrow-left"></i></a>
+		<a id='config' href="config"><i class="fa fa-wrench"></i></a>
+	</div>
+	<div class="wrap-list">
+		<ol class="list">
+			<li ng-repeat="item in list">
+				<table>
+					<tr>
+						<td>
+							{{item["supplier"]}}
+						</td>
+						<td>
+							{{item["name"]}}
+						</td>
+						<td>
+							{{item["newPrice"]}}
+						</td>
+						<td>
+							{{item["oldPrice"]}}
+						</td>
+						<td>
+							save {{item["save"]}}%
+						</td>
+					</tr>
+				</table>
+				 </li>
+		</ol>
+	</div>
+</div>

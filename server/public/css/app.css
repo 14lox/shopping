@@ -97,6 +97,14 @@ a.saving:hover{
   text-decoration: none;
 }
 
+.remove{
+  margin-top: -32px;
+  padding-right: 10px;
+  font-size: 22px ;
+  color: #888;
+  float: right;
+}
+
 .main{
   padding-left: 5px;
   font-size: 18px;
@@ -120,5 +128,10 @@ a.saving:hover{
 a:hover{
   color: #0088cc
   text-decoration: none;
+}
+
+.bought{
+  text-decoration: line-through;
+  color: #888;
 }
 

@@ -8,14 +8,21 @@
 		<ol class="list">
 			<li ng-repeat="item in list"> 
 				<div class='main'>
-					<input type='checkbox'/>
+					<input type='checkbox' ng-click="toggleBoughtItem(item['name'], true)"/>
 					<a href='' data-unique="1" bs-popover="'/partials/context_menu.html'" ng-click="setCurrentItem(item['name'])">{{item["name"]}}</a>
 				</div>
 
 				<a class='saving' ng-if='item["save"]' href='#/items/{{item["name"]}}'><i class="fa fa-gift"></i> </a>
 				
 			</li>
+			<li/>
+			<li ng-repeat="item in boughtList"> 
+				<div class='main'>
+					<input type='checkbox' ng-click="toggleBoughtItem(item['name'], false)" checked/>
+					<span class='bought'>{{item["name"]}}</span>
+				</div>
+				<span class='remove' ng-click="removeItem(item['name'])"><i class="fa fa-times"></i> </span>
+			</li>
 		</ol>
 	</div>
-</div>
 </div>

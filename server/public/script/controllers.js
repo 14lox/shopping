@@ -8,6 +8,7 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '_',
   function MyListCtrl($scope, $http) {
 
     $scope.list = [];
+    $scope.boughtList = [];
     $scope.query = '';
     var itemOrder = 0;
 
@@ -29,29 +30,46 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '_',
      $scope.newItem = '';
 
       //set local storage
-      var dataStr = JSON.stringify({order: ++itemOrder, date:new Date()})
+      var dataStr = JSON.stringify({order: ++itemOrder, bought:false, date:new Date()})
       localStorage.setItem($scope.query.itemlize(), dataStr);
 
       $http.post('/promotion/post_query', {query: $scope.query}).success(successCallback);
     };
 
-    var currentItem;
-    $scope.setCurrentItem = function(item){
-      currentItem = item;
-    }
     
-    $scope.removeItem = function(){
-      var obj = _.find($scope.list, function(element){
-        return element.name == currentItem;
+    $scope.removeItem = function(item){
+      var obj = _.find($scope.boughtList, function(element){
+        return element.name == item;
       });
-      var idx = _.indexOf($scope.list, obj);
+      var idx = _.indexOf($scope.boughtList, obj);
       //remove from list
-      $scope.list.splice(idx, 1);
+      $scope.boughtList.splice(idx, 1);
 
       //set local storage
-      localStorage.removeItem(currentItem.itemlize());
-      $scope.hide();
+      localStorage.removeItem(item.itemlize());
     };
+
+    $scope.toggleBoughtItem = function(item, bought){
+      var fromList = bought? $scope.list : $scope.boughtList;
+      var toList = bought?$scope.boughtList : $scope.list;
+
+      var obj = _.find(fromList, function(element){
+        return element.name == item;
+      });
+      var idx = _.indexOf(fromList, obj);
+      fromList.splice(idx, 1);
+
+      toList.push(obj);
+      
+      sortList();
+      
+
+      //update local storage
+      var local = JSON.parse(localStorage[item.itemlize()]);
+      local.bought = bought;
+
+      localStorage.setItem(item.itemlize(), JSON.stringify(local));
+      };
 
     
 
@@ -81,17 +99,24 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '_',
           var storageObj = JSON.parse(localStorage[obj]);
           var saving = storageObj.saving;
           var order = storageObj.order;
-          if(saving == undefined){
-            $scope.list.push({name:obj.deItemlize(), save: false, order: order});
+          var target = storageObj.bought ? $scope.boughtList : $scope.list;
+
+          if(saving == undefined){ //don't show saving for bought item
+            target.push({name:obj.deItemlize(), save: false, order: order});
           }else{
-            $scope.list.push({name:obj.deItemlize(), save: true, order: order});
+            target.push({name:obj.deItemlize(), save: true, order: order});
           }
           //get the max item order
           if(itemOrder < order) itemOrder = order;
         }
       }
-      $scope.list = _.sortBy($scope.list, function(item){return item.order});
+      sortList();
     };
+
+    var sortList = function(){
+      $scope.boughtList = _.sortBy($scope.boughtList, function(item){return item.order });
+      $scope.list = _.sortBy($scope.list, function(item){return item.order});
+    }
       // and fire it after definition
       init(); 
 
