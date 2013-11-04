@@ -3,9 +3,10 @@
 .wrap{
   width: 320px;
   margin: 50px auto;
+  min-height: 480px;
   border-radius: 10px;
   border-top: solid 2px #2c3033;
-  background: white;
+  background: rgb(255,228,138);
   box-shadow: 0 0 0px 1px rgba(255,255,255,.4),
             0 0 0px 3px #2c3033;
 }
@@ -44,7 +45,7 @@ input[type="checkbox"]:checked + label{
 }
 .list{
   list-style: none;
-  background: rgb(255,228,138);
+   background: rgb(255,228,138);
 }
 .list li:nth-child(odd){
   background: rgb(255,228,138);
@@ -53,6 +54,8 @@ input[type="checkbox"]:checked + label{
   vertical-align: middle;
   width: 100%;
   height: 32px;
+  font-size: 15px;
+  line-height: 32px;
   border-bottom: 1px solid;
   border-bottom-color:#ff8810;
 }
@@ -68,9 +71,54 @@ input[type="checkbox"]:checked + label{
 .header a
 {
   font-size: 28px;
+  color: #0088cc;
+}
+
+.header a:hover{
+  color: #0088cc;
+  text-decoration: none;
 }
 
 #config{
   float: right;
   padding-right: 10px;
 }
+
+.saving{
+  margin-top: -32px;
+  padding-right: 10px;
+  font-size: 22px ;
+  color: red;
+  float: right;
+}
+
+a.saving:hover{
+  color: red;
+  text-decoration: none;
+}
+
+.main{
+  padding-left: 5px;
+  font-size: 18px;
+  font-style: italic;
+  margin-right: 38px;
+  width: 88%;
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+
+.main a{
+  color: #000;
+}
+.main a:hover{
+  color: #000;
+  text-decoration: none;
+}
+
+a:hover{
+  color: #0088cc
+  text-decoration: none;
+}
+
