@@ -4,24 +4,29 @@
 		<a id='config' href="config"><i class="fa fa-wrench"></i></a>
 	</div>
 	<div class="wrap-list">
-		<ol class="list">
+		<ol class='savelist'>
 			<li ng-repeat="item in list">
-				<table>
+				<table border='1' width='100%'>
 					<tr>
-						<td>
-							{{item["supplier"]}}
+						<td width='45px'>
+							<font color='red' >{{item["supplier"]}}</font>
 						</td>
-						<td>
+						<td rowspan='3'>
 							{{item["name"]}}
 						</td>
 						<td>
-							{{item["newPrice"]}}
+							<font size='0.8em' >{{item["oldPrice"]}}</font>
 						</td>
-						<td>
-							{{item["oldPrice"]}}
+					</tr>
+					<tr>
+						<td rowspan='2'><i class="fa fa-picture-o"></i></td>
+						<td width='55px'>
+							<font size='2.8em' >{{item["newPrice"]}}</font>
 						</td>
+					</tr>
+					<tr>
 						<td>
-							save {{item["save"]}}%
+							<font size='1.8em' >{{item["save"]}}% off</font>
 						</td>
 					</tr>
 				</table>
