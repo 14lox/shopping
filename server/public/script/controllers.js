@@ -128,10 +128,9 @@ shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParam
   function($scope, $routeParams) {
     $scope.item = $routeParams.itemId.itemlize();
     $scope.list = [];
-
     $scope.current_img = '';
 
-    var setCurrentImg = function(img){
+    $scope.setCurrentImg = function(img){
       $scope.current_img = img;
     };
     

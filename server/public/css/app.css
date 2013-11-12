@@ -60,6 +60,11 @@ input[type="checkbox"]:checked + label{
   border-bottom-color:#ff8810;
 }
 
+.savelist li{
+  border-bottom: 2px solid;
+  border-bottom-color:#ff8810;
+  margin-top: 4px;
+}
 
 .header input{
   margin-left: 5px;
@@ -81,7 +86,11 @@ input[type="checkbox"]:checked + label{
 
 #config{
   float: right;
-  padding-right: 10px;
+  padding-right: 15px;
+}
+
+#back{
+  margin-left: 12px;
 }
 
 .saving{
@@ -139,3 +148,29 @@ a:hover{
   color: #888;
 }
 
+.center{
+  text-align: center;
+}
+.popover_close{
+  text-align: center;
+  margin-top: 8px;
+}
+
+.number_price{
+  font-size: 15px;
+  color: red;
+  font-weight: bold;
+}
+
+.string_price{
+  font-size: 12px;
+  color: red;
+}
+
+.Coles{
+  color: red;
+}
+
+.Wollies{
+  color: green;
+}
