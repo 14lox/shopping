@@ -89,8 +89,10 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '_',
       localStorage.setItem($scope.query.itemlize(), JSON.stringify(obj));
     };
 
-
-
+    var setCurrentImg = function(img)
+    {
+      alert(img);
+    }
 
     var init = function () {
       for(var obj in window.localStorage){
@@ -126,6 +128,12 @@ shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParam
   function($scope, $routeParams) {
     $scope.item = $routeParams.itemId.itemlize();
     $scope.list = [];
+
+    $scope.current_img = '';
+
+    var setCurrentImg = function(img){
+      $scope.current_img = img;
+    };
     
     var init = function(){
       var obj = JSON.parse(localStorage[$scope.item]);
