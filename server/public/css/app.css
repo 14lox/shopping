@@ -1,5 +1,7 @@
-
-@media (max-width: 480px){
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
   .wrap{
   width: 100%;
   margin: 2px;
@@ -9,10 +11,98 @@
   background: rgb(255,228,138);
   box-shadow: 0 0 0px 1px rgba(255,255,255,.4),
             0 0 0px 3px #2c3033;
-}
+  }
+/* Styles */
 }
 
-@media (min-width: 480px){
+/* Smartphones (landscape) ----------- */
+@media only screen 
+and (min-width : 321px) {
+/* Styles */
+.wrap{
+  width: 100%;
+  margin: 2px;
+  min-height: 480px;
+  border-radius: 10px;
+  border-top: solid 2px #2c3033;
+  background: rgb(255,228,138);
+  box-shadow: 0 0 0px 1px rgba(255,255,255,.4),
+            0 0 0px 3px #2c3033;
+  }
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen 
+and (max-width : 320px) {
+  .wrap{
+  width: 100%;
+  margin: 2px;
+  min-height: 480px;
+  border-radius: 10px;
+  border-top: solid 2px #2c3033;
+  background: rgb(255,228,138);
+  box-shadow: 0 0 0px 1px rgba(255,255,255,.4),
+            0 0 0px 3px #2c3033;
+  }
+/* Styles */
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) {
+  .wrap{
+  width: 100%;
+  margin: 2px;
+  min-height: 480px;
+  border-radius: 10px;
+  border-top: solid 2px #2c3033;
+  background: rgb(255,228,138);
+  box-shadow: 0 0 0px 1px rgba(255,255,255,.4),
+            0 0 0px 3px #2c3033;
+  }
+/* Styles */
+}
+
+/* iPads (landscape) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) {
+  .wrap{
+  width: 100%;
+  margin: 2px;
+  min-height: 480px;
+  border-radius: 10px;
+  border-top: solid 2px #2c3033;
+  background: rgb(255,228,138);
+  box-shadow: 0 0 0px 1px rgba(255,255,255,.4),
+            0 0 0px 3px #2c3033;
+  }
+/* Styles */
+}
+
+/* iPads (portrait) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) {
+  .wrap{
+  width: 100%;
+  margin: 2px;
+  min-height: 480px;
+  border-radius: 10px;
+  border-top: solid 2px #2c3033;
+  background: rgb(255,228,138);
+  box-shadow: 0 0 0px 1px rgba(255,255,255,.4),
+            0 0 0px 3px #2c3033;
+  }
+/* Styles */
+}
+
+/* Desktops and laptops ----------- */
+@media only screen 
+and (min-width : 1224px) {
   .wrap{
   width: 480px;
   margin: 50px auto;
@@ -25,6 +115,42 @@
 }
 }
 
+/* Large screens ----------- */
+@media only screen 
+and (min-width : 1824px) {
+  .wrap{
+  width: 480px;
+  margin: 50px auto;
+  min-height: 480px;
+  border-radius: 10px;
+  border-top: solid 2px #2c3033;
+  background: rgb(255,228,138);
+  box-shadow: 0 0 0px 1px rgba(255,255,255,.4),
+            0 0 0px 3px #2c3033;
+}
+}
+
+/* iPhone 4 ----------- */
+@media
+only screen and (-webkit-min-device-pixel-ratio : 1.5),
+only screen and (min-device-pixel-ratio : 1.5) {
+/* Styles */
+.wrap{
+  width: 100%;
+  margin: 2px;
+  min-height: 480px;
+  border-radius: 10px;
+  border-top: solid 2px #2c3033;
+  background: rgb(255,228,138);
+  box-shadow: 0 0 0px 1px rgba(255,255,255,.4),
+            0 0 0px 3px #2c3033;
+  }
+}
+
+.view{
+  padding-left: 2px;
+  padding-right: 2px;
+}
 
 .header{
   width: 100%;
