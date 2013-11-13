@@ -4,8 +4,10 @@
 
 var shoppingAppControllers = angular.module('shoppingAppControllers', []);
 
-shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '_',
-  function MyListCtrl($scope, $http) {
+shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '_',
+  function MyListCtrl($scope, $http, $window) {
+
+    $scope.$window = $window;
 
     $scope.list = [];
     $scope.boughtList = [];
@@ -71,7 +73,11 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '_',
       localStorage.setItem(item.itemlize(), JSON.stringify(local));
       };
 
-    
+    $scope.navTo = function(itemName, hasSave){
+       if(hasSave){
+          $window.location.href = '#/items/' + itemName
+       }
+    }
 
 
     var	successCallback = function(data){

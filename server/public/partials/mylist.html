@@ -6,7 +6,7 @@
 	</div>
 	<div class="wrap-list">
 		<ol class="list">
-			<li ng-repeat="item in list"> 
+			<li ng-repeat="item in list" ng-click='navTo(item["name"], item["save"])'> 
 				<div class='main'>
 					<input type='checkbox' ng-click="toggleBoughtItem(item['name'], true)"/>
 					{{item["name"]}}
