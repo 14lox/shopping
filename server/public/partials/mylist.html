@@ -9,7 +9,7 @@
 			<li ng-repeat="item in list"> 
 				<div class='main'>
 					<input type='checkbox' ng-click="toggleBoughtItem(item['name'], true)"/>
-					<a href='' data-unique="1" bs-popover="'/partials/context_menu.html'" ng-click="setCurrentItem(item['name'])">{{item["name"]}}</a>
+					{{item["name"]}}
 				</div>
 
 				<a class='saving' ng-if='item["save"]' href='#/items/{{item["name"]}}'><i class="fa fa-gift"></i> </a>
