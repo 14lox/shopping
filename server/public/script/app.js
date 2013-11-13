@@ -6,7 +6,8 @@ var shoppingApp = angular.module('shoppingApp', [
   'ngRoute',
   'shoppingAppControllers',
   'underscore',
-  '$strap.directives'
+  '$strap.directives',
+  'shoppingDirectives'
 ]);
 
 shoppingApp.config(['$routeProvider',

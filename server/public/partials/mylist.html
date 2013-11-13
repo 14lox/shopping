@@ -1,6 +1,6 @@
 <div class="wrap">
 	<div class="header">
-		<input type="text" id="item" ng-model='newItem' required ng-trim='true'></input>
+		<input type="text" id="item" ng-model='newItem' required ng-trim='true' ng-enter='addItem()'></input>
 		<a href="" ng-click="addItem()"><i class="fa fa-plus-circle"></i></a>
 		<a id='config' href="config"><i class="fa fa-wrench"></i></a>
 	</div>
