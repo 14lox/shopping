@@ -17,7 +17,24 @@ and (max-device-width : 1024px) {
   }
 }
 
-
+@media 
+only screen and (-webkit-min-device-pixel-ratio: 1.25), 
+only screen and (min-device-pixel-ratio : 1.5) 
+(min-resolution: 120dpi){
+  .wrap{
+  width: 100%;
+  margin: 2px;
+  min-height: 100%;
+  border-radius: 10px;
+  border-top: solid 2px #2c3033;
+  background: rgb(255,228,138);
+  box-shadow: 0 0 0px 1px rgba(255,255,255,.4),
+            0 0 0px 3px #2c3033;
+  }
+  body, html {
+    height: 100%;
+  }
+}
 
 /* Desktops and laptops ----------- */
 @media only screen 
@@ -52,7 +69,7 @@ and (min-width : 1224px) {
   }
 
 .view{
-  padding-left: 2px;
+  padding-left: 0px;
   padding-right: 2px;
   height: 100%;
 }
