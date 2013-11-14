@@ -1,43 +1,45 @@
-<div class="wrap">
-	<div class="header">
-		<a  id='back' href='#/mylist'><i class="fa fa-arrow-circle-left"></i></a>
-		<a id='config' href="config"><i class="fa fa-wrench"></i></a>
-	</div>
-	<div class="wrap-list">
-		<ol class='savelist'>
-			<li ng-repeat="item in list" data-unique="1" bs-popover="'/partials/img.html'" ng-click="setCurrentImg(item['img'])">
-				<table border='0' width='100%' class='center'>
-					<tr>
-						<td width='45px'>
-							<span ng-class="item['supplier']">{{item["supplier"]}}</span>
-						</td>
-						<td rowspan='3' class='center'>
-							{{item["name"]}}
-						</td>
-						<td ng-if="item['save'] != 0">
-							<font size='0.8em' >{{item["oldPrice"]}}</font>
-						</td>
-						<td width='55px' rowspan='3'  ng-if="item['save'] == 0">
-							<span class="string_price">{{item["newPrice"]}}</span>
-						</td>
-					</tr>
-					<tr>
-						<td rowspan='2' class='center'>
-							<a href='' data-unique="1" bs-popover="'/partials/img.html'" ng-click="setCurrentImg(item['img'])">
-								<img src='/image/image.png'>
-							</a>
-						</td>
-						<td width='55px' ng-if="item['save'] != 0" class='center'>
-							<span class='number_price'>{{item["newPrice"]}}</span>
-						</td>
-					</tr>
-		
-						<td ng-if="item['save'] != 0">
-							<font size='1.8em' >{{item["save"]}}% off</font>
-						</td>
-					</tr>
-				</table>
-				 </li>
+	<div class="wrap">
+		<div class="header">
+			<a  id='back' href='#/mylist'><i class="fa fa-arrow-circle-left"></i></a>
+			<a id='config' href="config"><i class="fa fa-wrench"></i></a>
+		</div>
+		<div class="wrap-list">
+			<ol class='savelist'>
+				<li ng-repeat="item in list">
+					<a href='' data-unique="1" bs-popover="'/partials/img.html'" ng-click="setCurrentImg(item['img'])">
+						<table border='0' width='100%' class='center'>
+							<tr>
+								<td width='45px'>
+									<span ng-class="item['supplier']">{{item["supplier"]}}</span>
+								</td>
+								<td rowspan='3' class='center'>
+									{{item["name"]}}
+								</td>
+								<td ng-if="item['save'] != 0">
+									<font size='0.8em' >{{item["oldPrice"]}}</font>
+								</td>
+								<td width='55px' rowspan='3'  ng-if="item['save'] == 0">
+									<span class="string_price">{{item["newPrice"]}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td rowspan='2' class='center'>
+									
+									<img src='/image/image.png'>
+									
+								</td>
+								<td width='55px' ng-if="item['save'] != 0" class='center'>
+									<span class='number_price'>{{item["newPrice"]}}</span>
+								</td>
+							</tr>
+							
+							<td ng-if="item['save'] != 0">
+								<font size='1.8em' >{{item["save"]}}% off</font>
+							</td>
+						</tr>
+					</table>
+				</a>
+			</li>
 		</ol>
 	</div>
 </div>
