@@ -5,7 +5,7 @@
 	</div>
 	<div class="wrap-list">
 		<ol class='savelist'>
-			<li ng-repeat="item in list">
+			<li ng-repeat="item in list" data-unique="1" bs-popover="'/partials/img.html'" ng-click="setCurrentImg(item['img'])">
 				<table border='0' width='100%' class='center'>
 					<tr>
 						<td width='45px'>
