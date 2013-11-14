@@ -6,7 +6,7 @@
 		<div class="wrap-list">
 			<ol class='savelist'>
 				<li ng-repeat="item in list">
-					<a href='' data-unique="1" bs-popover="'/partials/img.html'" ng-click="setCurrentImg(item['img'])">
+					<a href='' data-unique="1" data-placement='bottom' bs-popover="'/partials/img.html'" ng-click="setCurrentImg(item['img'])">
 						<table border='0' width='100%' class='center'>
 							<tr>
 								<td width='45px'>
@@ -24,15 +24,15 @@
 							</tr>
 							<tr>
 								<td rowspan='2' class='center'>
-									
+
 									<img src='/image/image.png'>
-									
+
 								</td>
 								<td width='55px' ng-if="item['save'] != 0" class='center'>
 									<span class='number_price'>{{item["newPrice"]}}</span>
 								</td>
 							</tr>
-							
+
 							<td ng-if="item['save'] != 0">
 								<font size='1.8em' >{{item["save"]}}% off</font>
 							</td>
