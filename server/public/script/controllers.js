@@ -4,8 +4,8 @@
 
 var shoppingAppControllers = angular.module('shoppingAppControllers', []);
 
-shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '_',
-  function MyListCtrl($scope, $http, $window) {
+shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', 'activeSupplierService', '_',
+  function MyListCtrl($scope, $http, $window,activeSupplierService) {
 
     $scope.$window = $window;
 
@@ -79,6 +79,12 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
        }
     }
 
+    var showSave = function(savings){
+       return _.filter(savings, function(obj){
+        return activeSupplierService.isSupplierActive(obj['supplier']);
+      }).length > 0;
+    }
+
 
     var	successCallback = function(data){
     	if(data.promotions.length == 0) return;
@@ -87,10 +93,11 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
       var target = _.find($scope.list, function(item){
         return item.name == $scope.query;
       });
-      target.save = true;
+      
 
       var obj = JSON.parse(localStorage[$scope.query.itemlize()]);
       obj.saving = data.promotions;
+      target.save = showSave(obj.saving);
 
       localStorage.setItem($scope.query.itemlize(), JSON.stringify(obj));
     };
@@ -112,7 +119,7 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
           if(saving == undefined){ //don't show saving for bought item
             target.push({name:obj.deItemlize(), save: false, order: order});
           }else{
-            target.push({name:obj.deItemlize(), save: true, order: order});
+            target.push({name:obj.deItemlize(), save: showSave(saving), order: order});
           }
           //get the max item order
           if(itemOrder < order) itemOrder = order;
@@ -130,8 +137,8 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
 
     }]);
 
-shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParams',
-  function($scope, $routeParams) {
+shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParams', 'activeSupplierService',
+  function($scope, $routeParams, activeSupplierService) {
     $scope.item = $routeParams.itemId.itemlize();
     $scope.list = [];
     $scope.current_img = '';
@@ -142,8 +149,29 @@ shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParam
     
     var init = function(){
       var obj = JSON.parse(localStorage[$scope.item]);
-      $scope.list = obj.saving;
+      $scope.list = _.filter(obj.saving, function(obj){
+        return activeSupplierService.isSupplierActive(obj['supplier']);
+      });
     };
 
     init();
+  }]);
+
+
+shoppingAppControllers.controller('ConfigCtrl', ['$scope', 'activeSupplierService',
+  function($scope,activeSupplierService) {
+    //this should be a global config for all the supported suppliers
+    
+
+    $scope.allSuppliers = activeSupplierService.getAllSuppliers();
+
+   
+    $scope.isSupplierActive = function(supplier){
+      return activeSupplierService.isSupplierActive(supplier);
+    }
+
+    $scope.toggleActive = function(supplier){
+      activeSupplierService.toggleActive(supplier);
+
+    }
   }]);

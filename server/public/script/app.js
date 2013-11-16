@@ -7,7 +7,8 @@ var shoppingApp = angular.module('shoppingApp', [
   'shoppingAppControllers',
   'underscore',
   '$strap.directives',
-  'shoppingDirectives'
+  'shoppingDirectives',
+  'shoppingServices'
 ]);
 
 shoppingApp.config(['$routeProvider',
@@ -20,6 +21,10 @@ shoppingApp.config(['$routeProvider',
       when('/items/:itemId', {
         templateUrl: 'partials/itemPromotion.html',
         controller: 'PromotionDetailCtrl'
+      }).
+      when('/config', {
+        templateUrl: 'partials/config.html',
+        controller: 'ConfigCtrl'
       }).
       otherwise({
         redirectTo: '/mylist'
