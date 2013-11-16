@@ -9,10 +9,12 @@ exports.post_query = function(req, res, next){
 	console.log('get query ' + req.body.query);
 	var cl = new SphinxClient();
 	cl.SetServer('54.252.90.204', 9312);
+	cl.SetLimits(0, 50);
 	var query = req.body.query;
 
 	cl.Query(query, function(err, result) {
 		async.map(result.matches, getPromotionContent, function(err,results){
+			results = results.sort(function(item1, item2){return item1.save - item2.save}).reverse();
 			res.send({item: query, promotions: results});	
 		});
 	});
