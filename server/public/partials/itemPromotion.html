@@ -9,8 +9,9 @@
 					<a href='' data-unique="1" data-placement='bottom' bs-popover="'/partials/img.html'" ng-click="setCurrentImg(item['img'])">
 						<table border='0' width='100%' class='center'>
 							<tr>
-								<td width='45px'>
-									<span ng-class="item['supplier']">{{item["supplier"]}}</span>
+								<td width='45px' rowspan='3'>
+									<span ng-class="item['supplier']">
+										<img ng-src= "/image/{{item['supplier']}}.png"></img>
 								</td>
 								<td rowspan='3' class='center'>
 									{{item["name"]}}
@@ -23,11 +24,6 @@
 								</td>
 							</tr>
 							<tr>
-								<td rowspan='2' class='center'>
-
-									<img src='/image/image.png'>
-
-								</td>
 								<td width='55px' ng-if="item['save'] != 0" class='center'>
 									<span class='number_price'>{{item["newPrice"]}}</span>
 								</td>
