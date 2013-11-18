@@ -126,11 +126,27 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
         }
       }
       sortList();
+
+      processExpire();
     };
 
     var sortList = function(){
       $scope.boughtList = _.sortBy($scope.boughtList, function(item){return item.order });
       $scope.list = _.sortBy($scope.list, function(item){return item.order});
+    }
+
+    var processExpire = function(){
+      $scope.isExpired = false;
+      var lastRefreshTime = localStorage["lastRefreshTime"];
+      if(lastRefreshTime == undefined){
+        //UTC Date value in seconds
+        lastRefreshTime = Math.ceil(Date.now()/1000);
+        localStorage["lastRefreshTime"] = lastRefreshTime;
+      }
+      $http.get('/promotion/isExpired?lastRefreshTime=' + lastRefreshTime)
+      .success(function(data, status, headers, config) {
+          $scope.isExpired = data ==='true';
+        })
     }
       // and fire it after definition
       init(); 

@@ -20,6 +20,19 @@ exports.post_query = function(req, res, next){
 	});
 }
 
+exports.isExpired = function(req, res, next){
+	var lastRefreshTime = parseInt(req.query.lastRefreshTime);
+
+	var query = 'SELECT updateTime from UpdateHistory order by id desc limit 1';
+	Db.runQuery(query)
+	.then(function(result){
+		var updateTime = parseInt(result[0].updateTime);
+		res.send(updateTime < lastRefreshTime ? 'false' : 'true');
+	})
+	.done();
+
+}
+
 getPromotionContent = function(match,callback){
 	var query = 'SELECT name, newPrice, oldPrice, save, img from Current where id = ' + match.id;
 	Db.runQuery(query)
