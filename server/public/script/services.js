@@ -9,7 +9,7 @@ services.provider('activeSupplierService', function () {
 	this.activeSuppliers = parseInt(localStorage['activeSuppliers']);
   	if(isNaN(this.activeSuppliers)){
     	//default to select all, so it is 2^n - 1
-    	this.activeSuppliers = Math.pow(2, _.keys(suppliers).length) - 1;
+    	this.activeSuppliers = Math.pow(2, _.keys(this.suppliers).length) - 1;
   	}
 
 	this.$get = function() {
