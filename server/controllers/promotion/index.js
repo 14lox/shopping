@@ -2,7 +2,8 @@ var SphinxClient = require ("sphinxapi"),
     util = require('util'),
     helper = require('../../lib/helper.js'),
     Db = require('../../lib/db.js'),
-    async = require('async');
+    async = require('async'),
+    _ = require('underscore');
 
 //return sample {item: egg, promotions: [{supplier:'coles', name: 'free range egg', newPrice:'1.99', oldPrice:'2:99', save: 20}, {...}]}
 exports.post_query = function(req, res, next){
@@ -18,6 +19,21 @@ exports.post_query = function(req, res, next){
 			res.send({item: query, promotions: results});	
 		});
 	});
+}
+
+exports.post_bulkquery = function(req, res, next){
+	console.log('get query ' + req.body.queries);
+	
+	var queries = req.body.queries;
+	async.parallel(
+		_.map(queries, function(query){ return generateQueryFunc(query)}),
+		function(err, results){
+			_.each(results, function(r){console.log('result for item ' + r.item)})
+			res.send(results);
+		}
+		);
+	// _.each(queries, function(query){results.push({"item": query, 
+	// 	"promotions":[{"supplier": "Coles", "name": "save 10", "newPrice":"100", "oldPrice":"200", "save":"50", "img":"none"}]})});
 }
 
 exports.isExpired = function(req, res, next){
@@ -46,4 +62,19 @@ getPromotionContent = function(match,callback){
 	})
 	.done();
 
+}
+
+generateQueryFunc = function(query){
+	return function(callback){
+		var cl = new SphinxClient();
+		cl.SetServer('54.252.90.204', 9312);
+		cl.SetLimits(0, 50);
+		cl.Query(query, function(err, result) {
+				async.map(result.matches, getPromotionContent, function(err,results){
+					results = results.sort(function(item1, item2){return item1.save - item2.save}).reverse();
+
+			 		callback(err, {item: query, promotions: results});	
+				});
+		});
+	}
 }

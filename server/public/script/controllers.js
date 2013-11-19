@@ -79,6 +79,30 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
        }
     }
 
+    $scope.refresh = function(){
+      $http.post('/promotion/post_bulkquery', {queries: _.pluck($scope.list, 'name')}).success(bulk_query_succeeded);
+    }
+
+    //data format:  [{item: rice, promotions:[{},{}]}, {item: samlon, promotions:[]}]
+    var bulk_query_succeeded = function(dataList){
+        _.each($scope.list, function(item){
+            var newItem = _.find(dataList, function(d){return d.item == item.name});
+            if(newItem == undefined) return; //should not happen
+
+            var obj = JSON.parse(localStorage[item.name.itemlize()]);
+            obj.saving = newItem.promotions;
+            localStorage.setItem(item.name.itemlize(), JSON.stringify(obj));
+
+            item.save = showSave(obj.saving);
+
+        });
+
+        //set last update time
+        localStorage["lastRefreshTime"] = Math.ceil(Date.now()/1000);
+        $scope.isExpired = false;
+
+    }
+
     var showSave = function(savings){
        return _.filter(savings, function(obj){
         return activeSupplierService.isSupplierActive(obj['supplier']);
