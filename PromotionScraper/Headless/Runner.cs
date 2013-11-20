@@ -17,7 +17,7 @@ namespace Headless
 			
 			CopyScript(connectionInfo);
 			
-			RunRefreshShell(connectionInfo);
+			//RunRefreshShell(connectionInfo);
 
 		}
 

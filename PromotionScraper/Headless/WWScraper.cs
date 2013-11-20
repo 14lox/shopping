@@ -101,6 +101,7 @@ namespace Headless
 			var link = linkNode.GetAttributeValue("href", "");
 			link = link.MakeAbsoluteUrl(host);
 			var img = imgNode.GetAttributeValue("src", "");
+			img.Replace("/small/", "/big/");
 			img = img.MakeAbsoluteUrl(host);
 
 			var content = string.Format("{0},{1},{2},{3},{4}", prodNameNode.Text(), priceNode.Text(), originalPriceNode.Text(), link, img);
