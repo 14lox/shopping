@@ -7,6 +7,9 @@
 	<div class="alert fade center" bs-alert ng-if="isExpired">
 		Some of the promotions may be out of date. <a href='' ng-click='refresh()'>Click here</a> to refresh
 	</div>
+	<div class='spinner' ng-if='showSpinner'>
+		<img src='/image/spinner.gif' class='ajax-loader'/>
+	</div>
 
 	<div class="wrap-list">
 		<ol class="list">

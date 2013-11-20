@@ -12,6 +12,8 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
     $scope.list = [];
     $scope.boughtList = [];
     $scope.query = '';
+    $scope.showSpinner = false;
+
     var itemOrder = 0;
 
     $scope.addItem = function(){
@@ -24,7 +26,9 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
        alert("item already exists in the list");
        return;
      }
-
+     if($scope.list.length == 0){
+      setLastUpdateTime();
+     }
      $scope.list.push({name:$scope.newItem, save:false});
 
      //reset newItem so the html input is cleared
@@ -35,7 +39,7 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
       var dataStr = JSON.stringify({order: ++itemOrder, bought:false, date:new Date()})
       localStorage.setItem($scope.query.itemlize(), dataStr);
 
-      $http.post('/promotion/post_query', {query: $scope.query}).success(successCallback);
+      $http.post('/promotion/post_query', {query: $scope.query}).success(query_succeeded);
     };
 
     
@@ -80,7 +84,13 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
     }
 
     $scope.refresh = function(){
-      $http.post('/promotion/post_bulkquery', {queries: _.pluck($scope.list, 'name')}).success(bulk_query_succeeded);
+      $scope.showSpinner = true;
+      $http.post('/promotion/post_bulkquery', {queries: _.pluck($scope.list, 'name')}).
+        success(bulk_query_succeeded).
+        error(function(){
+          alert('Sorry, cannot refresh at the moment. Please try later');
+          $scope.showSpinner = false;
+        });
     }
 
     //data format:  [{item: rice, promotions:[{},{}]}, {item: samlon, promotions:[]}]
@@ -97,10 +107,14 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
 
         });
 
-        //set last update time
-        localStorage["lastRefreshTime"] = Math.ceil(Date.now()/1000);
+        setLastUpdateTime();
         $scope.isExpired = false;
+        $scope.showSpinner = false;
 
+    }
+
+    var setLastUpdateTime = function(){
+      localStorage["lastRefreshTime"] = Math.ceil(Date.now()/1000);
     }
 
     var showSave = function(savings){
@@ -110,7 +124,7 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
     }
 
 
-    var	successCallback = function(data){
+    var	query_succeeded = function(data){
     	if(data.promotions.length == 0) return;
 
       //set the list item with saving: true
@@ -125,11 +139,6 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
 
       localStorage.setItem($scope.query.itemlize(), JSON.stringify(obj));
     };
-
-    var setCurrentImg = function(img)
-    {
-      alert(img);
-    }
 
     var init = function () {
       for(var obj in window.localStorage){
@@ -161,11 +170,16 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
 
     var processExpire = function(){
       $scope.isExpired = false;
+
+      //don't set expire if there is no item
+      if($scope.list.length == 0){
+        return;
+      }
+
       var lastRefreshTime = localStorage["lastRefreshTime"];
       if(lastRefreshTime == undefined){
         //UTC Date value in seconds
-        lastRefreshTime = Math.ceil(Date.now()/1000);
-        localStorage["lastRefreshTime"] = lastRefreshTime;
+        setLastUpdateTime();
       }
       $http.get('/promotion/isExpired?lastRefreshTime=' + lastRefreshTime)
       .success(function(data, status, headers, config) {

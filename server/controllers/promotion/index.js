@@ -14,6 +14,10 @@ exports.post_query = function(req, res, next){
 	var query = req.body.query;
 
 	cl.Query(query, function(err, result) {
+		if(err){
+			res.send(500, { error: 'something blew up' });
+			return;
+		}
 		async.map(result.matches, getPromotionContent, function(err,results){
 			results = results.sort(function(item1, item2){return item1.save - item2.save}).reverse();
 			res.send({item: query, promotions: results});	
@@ -28,6 +32,10 @@ exports.post_bulkquery = function(req, res, next){
 	async.parallel(
 		_.map(queries, function(query){ return generateQueryFunc(query)}),
 		function(err, results){
+			if(err){
+				res.send(500, { error: 'something blew up' });
+				return;
+			}
 			_.each(results, function(r){console.log('result for item ' + r.item)})
 			res.send(results);
 		}
@@ -70,6 +78,10 @@ generateQueryFunc = function(query){
 		cl.SetServer('54.252.90.204', 9312);
 		cl.SetLimits(0, 50);
 		cl.Query(query, function(err, result) {
+				if(err){
+					res.send(500, { error: 'something blew up' });
+					return;
+				}
 				async.map(result.matches, getPromotionContent, function(err,results){
 					results = results.sort(function(item1, item2){return item1.save - item2.save}).reverse();
 
