@@ -27,7 +27,7 @@ shoppingApp.config(['$routeProvider',
         controller: 'ConfigCtrl'
       }).
       when('/topsavings',{
-        templateUrl: 'partials/topsavings.html',
+        templateUrl: 'partials/topSavings.html',
         controller: 'TopSavingsCtrl'
       }).
       otherwise({
