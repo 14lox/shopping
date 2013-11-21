@@ -2,8 +2,8 @@
 	<div class="header">
 		<a  id='back' href='#/mylist'><i class="fa fa-arrow-circle-left"></i></a>
 	</div>
-	<div>
-		<h4>show me discounts from:</h4>
+	<div class = 'mainconfig'>
+		<h3>show me discounts from:</h3>
 		<ol>
 			<li ng-repeat="supplier in allSuppliers">
 				<input type='checkbox' ng-checked="isSupplierActive(supplier)" ng-click="toggleActive(supplier)"/>{{supplier}}

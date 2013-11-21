@@ -147,6 +147,11 @@ input[type="checkbox"]:checked + label{
   text-decoration: none;
 }
 
+#topsaving{
+  float: right;
+  padding-right: 15px;
+}
+
 #config{
   float: right;
   padding-right: 15px;
@@ -261,4 +266,19 @@ a:hover{
     margin-left: -32px; /* -1 * image width / 2 */
     margin-top: -32px;  /* -1 * image height / 2 */
     display: block;     
+}
+
+.mainconfig{
+  padding-left: 8px;
+}
+
+.mainconfig li{
+  list-style: disc;
+}
+
+#loadmore{
+  text-align: center;
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }

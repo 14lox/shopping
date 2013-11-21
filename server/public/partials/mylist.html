@@ -3,6 +3,7 @@
 		<input type="text" id="item" ng-model='newItem' required ng-trim='true' ng-enter='addItem()'></input>
 		<a href="" ng-click="addItem()"><i class="fa fa-plus-circle"></i></a>
 		<a id='config' href="#/config"><i class="fa fa-wrench"></i></a>
+		<a id='topsaving' href="#/topsavings"><i class="fa fa-thumbs-o-up"></i></a>
 	</div>
 	<div class="alert fade center" bs-alert ng-if="isExpired">
 		Some of the promotions may be out of date. <a href='' ng-click='refresh()'>Click here</a> to refresh

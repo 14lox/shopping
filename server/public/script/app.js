@@ -26,6 +26,10 @@ shoppingApp.config(['$routeProvider',
         templateUrl: 'partials/config.html',
         controller: 'ConfigCtrl'
       }).
+      when('/topsavings',{
+        templateUrl: 'partials/topsavings.html',
+        controller: 'TopSavingsCtrl'
+      }).
       otherwise({
         redirectTo: '/mylist'
       });

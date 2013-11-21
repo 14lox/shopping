@@ -36,7 +36,6 @@ exports.post_bulkquery = function(req, res, next){
 				res.send(500, { error: 'something blew up' });
 				return;
 			}
-			_.each(results, function(r){console.log('result for item ' + r.item)})
 			res.send(results);
 		}
 		);
@@ -46,6 +45,10 @@ exports.post_bulkquery = function(req, res, next){
 
 exports.isExpired = function(req, res, next){
 	var lastRefreshTime = parseInt(req.query.lastRefreshTime);
+	if(isNaN(lastRefreshTime)){
+		res.send('false');
+		return;
+	}
 
 	var query = 'SELECT updateTime from UpdateHistory order by id desc limit 1';
 	Db.runQuery(query)
@@ -55,6 +58,34 @@ exports.isExpired = function(req, res, next){
 	})
 	.done();
 
+}
+
+exports.topSavings = function(req, res, next){
+	var offset = parseInt(req.query.offset);
+	if(isNaN(offset)){
+		offset = 0;
+	}
+
+	if(offset > 500){
+		res.send('[]');
+		return;
+	}
+
+	var query = 'SELECT supplierId, name, newPrice, oldPrice, save, img from Current order by save desc, newPrice desc limit 50 offset ' + offset;
+	Db.runQuery(query)
+	.then(function(results){
+		var items = [];
+		_.each(results, function(item){items.push({
+			"supplier" : helper.getSupplier(item.supplierId),
+			"name" : item.name,
+			"newPrice" : item.newPrice,
+			"oldPrice" : item.oldPrice,
+			"save": item.save,
+			"img" : item.img
+		})});
+		res.send(items);
+	})
+	.done();
 }
 
 getPromotionContent = function(match,callback){
