@@ -217,10 +217,6 @@ shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParam
     $scope.showSpinner = false;
 
 
-    $scope.setCurrentImg = function(img){
-      $scope.current_img = img;
-    };
-
     $scope.showImg = function(img){
       $scope.current_img = '/image/spinner.gif';
       $scope.showSpinner = true;
@@ -259,10 +255,31 @@ shoppingAppControllers.controller('TopSavingsCtrl', ['$scope', '$http', 'activeS
     $scope.list = [];
     $scope.allowMore = true;
     $scope.current_img = '';    
+    $scope.showSpinner = false;
 
-    $scope.setCurrentImg = function(img){
-      $scope.current_img = img;
-    };
+
+    $scope.showImg = function(img){
+      $scope.current_img = '/image/spinner.gif';
+      $scope.showSpinner = true;
+
+      $scope.image = {
+          path: "",
+      }
+
+      var imgObj = new Image();
+      imgObj.onload = function () {
+        $scope.$apply(function() {
+          $scope.current_img = img;
+        });
+      }
+      imgObj.src = img;
+
+    }
+
+    $scope.hideSpinner = function(){
+      $scope.showSpinner = false;
+    }
+   
     
     $scope.loadMore = function(){
       var local = localStorage['topSavings'];
