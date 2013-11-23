@@ -79,7 +79,15 @@ and (min-width : 1224px) {
   height: 50px;
 
   border-radius: 10px 10px 0 0px;
-  background-image: linear-gradient(#687480 0%, #3b4755 100%);
+  
+
+  background-color: #3b4755; /* fallback color if gradients are not supported */
+  background-image: -webkit-linear-gradient(top, #687480, #3b4755); /* For Chrome and Safari */
+  background-image:    -moz-linear-gradient(top, #687480, #3b4755); /* For old Fx (3.6 to 15) */
+  background-image:     -ms-linear-gradient(top, #687480, #3b4755); /* For pre-releases of IE 10*/
+  background-image:      -o-linear-gradient(top, #687480, #3b4755); /* For old Opera (11.1 to 12.0) */ 
+  background-image: linear-gradient(#687480 0%, #3b4755 100%); /* Standard syntax; must be last*/ 
+
   font: bold 18px/50px arial;
   color: white;
   box-shadow: inset 0 -2px 3px 2px rgba(0,0,0,.4),
@@ -130,11 +138,18 @@ input[type="checkbox"]:checked + label{
   margin-top: 4px;
 }
 
+.left{
+  float: left;
+  margin-left: 5px;
+}
+
 .header input{
   margin-left: 5px;
+  margin-top: 8px;
   width: 60%;
   height: 20px;
   border-radius: 5px 5px 5px 5px;
+  float: left;
 }
 
 .header a
