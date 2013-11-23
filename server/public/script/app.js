@@ -6,6 +6,7 @@ var shoppingApp = angular.module('shoppingApp', [
   'ngRoute',
   'shoppingAppControllers',
   'underscore',
+  'ngTouch',
   //'$strap.directives',
   'shoppingDirectives',
   'shoppingServices'

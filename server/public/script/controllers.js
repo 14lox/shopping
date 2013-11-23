@@ -163,6 +163,9 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
           if(itemOrder < order) itemOrder = order;
         }
       }
+
+      window.scrollTo(0,1) 
+      
       sortList();
 
       processExpire();
