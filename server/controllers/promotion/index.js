@@ -55,6 +55,8 @@ exports.isExpired = function(req, res, next){
 	.then(function(result){
 		var updateTime = parseInt(result[0].updateTime);
 		res.send(updateTime < lastRefreshTime ? 'false' : 'true');
+	}, function(err){
+		console.log(err);
 	})
 	.done();
 

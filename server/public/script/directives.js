@@ -17,3 +17,13 @@ directives.directive('ngEnter', function () {
         });
     };
 });
+
+directives.directive('ngImageOnLoad', function() {
+    return function(scope, element, attrs) {
+            element.bind('load', function() {
+                scope.$apply(function (){
+                    scope.$eval(attrs.ngImageOnLoad);
+                });
+            });
+    };
+});

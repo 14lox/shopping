@@ -91,6 +91,11 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
           alert('Sorry, cannot refresh at the moment. Please try later');
           $scope.showSpinner = false;
         });
+
+      $http.get('/promotion/topSavings').
+      success(function(data, status, headers, config){
+        localStorage["topSavings"] = JSON.stringify(data);
+      });
     }
 
     //data format:  [{item: rice, promotions:[{},{}]}, {item: samlon, promotions:[]}]
@@ -182,6 +187,7 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
       if(lastRefreshTime == undefined){
         //UTC Date value in seconds
         setLastUpdateTime();
+        return;
       }
       $http.get('/promotion/isExpired?lastRefreshTime=' + lastRefreshTime)
       .success(function(data, status, headers, config) {
@@ -208,10 +214,34 @@ shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParam
     $scope.item = $routeParams.itemId.itemlize();
     $scope.list = [];
     $scope.current_img = '';
+    $scope.showSpinner = false;
+
 
     $scope.setCurrentImg = function(img){
       $scope.current_img = img;
     };
+
+    $scope.showImg = function(img){
+      $scope.current_img = '/image/spinner.gif';
+      $scope.showSpinner = true;
+
+      $scope.image = {
+          path: "",
+      }
+
+      var imgObj = new Image();
+      imgObj.onload = function () {
+        $scope.$apply(function() {
+          $scope.current_img = img;
+        });
+      }
+      imgObj.src = img;
+
+    }
+
+    $scope.hideSpinner = function(){
+      $scope.showSpinner = false;
+    }
     
     var init = function(){
       var obj = JSON.parse(localStorage[$scope.item]);

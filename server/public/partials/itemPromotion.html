@@ -1,11 +1,18 @@
 	<div class="wrap">
 		<div class="header">
 			<a  id='back' href='#/mylist'><i class="fa fa-arrow-circle-left"></i></a>
+			<span>Promotions</span>
+		</div>
+		<div class='spinner' ng-if='showSpinner'>
+			<img ng-src='{{current_img}}' class='ajax-loader'/>
+			<div class='popover_close'>
+			 	<a href='' ng-click="hideSpinner()"> <i class="fa fa-times-circle big"></i>  </a>
+			</div>
 		</div>
 		<div class="wrap-list">
 			<ol class='savelist'>
 				<li ng-repeat="item in list">
-					<a href='' data-unique="1" data-placement='bottom' bs-popover="'/partials/img.html'" ng-click="setCurrentImg(item['img'])">
+					<!-- <a href='' data-unique="1" data-placement='bottom' bs-popover="'/partials/img.html'" ng-click="setCurrentImg(item['img'])"> -->
 						<table border='0' width='100%' class='center'>
 							<tr>
 								<td width='45px' rowspan='3'>
@@ -13,7 +20,7 @@
 										<img ng-src= "/image/{{item['supplier']}}.png"></img>
 								</td>
 								<td rowspan='3' class='center'>
-									{{item["name"]}}
+									<a href='' ng-click="showImg(item['img'])" >{{item["name"]}}</a>
 								</td>
 								<td ng-if="item['save'] != 0">
 									<font size='0.8em' >{{item["oldPrice"]}}</font>
@@ -33,7 +40,7 @@
 							</td>
 						</tr>
 					</table>
-				</a>
+				<!-- </a> -->
 			</li>
 		</ol>
 	</div>
