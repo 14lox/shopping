@@ -1,46 +1,42 @@
-	<div class="wrap">
-		<div class="header">
-			<a  id='back' href='#/mylist'><i class="fa fa-arrow-circle-left"></i></a>
-			<span>Promotions</span>
+<div class="wrap">
+	<div class="header">
+		<a  id='back' href='#/mylist'><i class="fa fa-arrow-circle-left"></i></a>
+		<span>Promotions</span>
+	</div>
+	<div class='spinner' ng-if='showSpinner'>
+		<img ng-src='{{current_img}}' class='ajax-loader'/>
+		<div class='popover_close'>
+			<a href='' ng-click="hideSpinner()"> <i class="fa fa-times-circle big"></i>  </a>
 		</div>
-		<div class='spinner' ng-if='showSpinner'>
-			<img ng-src='{{current_img}}' class='ajax-loader'/>
-			<div class='popover_close'>
-			 	<a href='' ng-click="hideSpinner()"> <i class="fa fa-times-circle big"></i>  </a>
-			</div>
-		</div>
-		<div class="wrap-list">
-			<ol class='savelist'>
-				<li ng-repeat="item in list">
-					<!-- <a href='' data-unique="1" data-placement='bottom' bs-popover="'/partials/img.html'" ng-click="setCurrentImg(item['img'])"> -->
-						<table border='0' width='100%' class='center'>
-							<tr>
-								<td width='45px' rowspan='3'>
-									<span ng-class="item['supplier']">
-										<img ng-src= "/image/{{item['supplier']}}.png"></img>
-								</td>
-								<td rowspan='3' class='center'>
-									<a href='' ng-click="showImg(item['img'])" >{{item["name"]}}</a>
-								</td>
-								<td ng-if="item['save'] != 0">
-									<font size='0.8em' >{{item["oldPrice"]}}</font>
-								</td>
-								<td width='55px' rowspan='3'  ng-if="item['save'] == 0">
-									<span class="string_price">{{item["newPrice"]}}</span>
-								</td>
-							</tr>
-							<tr>
-								<td width='55px' ng-if="item['save'] != 0" class='center'>
-									<span class='number_price'>{{item["newPrice"]}}</span>
-								</td>
-							</tr>
-
-							<td ng-if="item['save'] != 0">
+	</div>
+	<div class="wrap-list">
+		<ol class='savelist'>
+			<li ng-repeat="item in list">
+				<table border='0' width='100%' class='center'>
+					<tr>
+						<td width='45px'>
+							<span ng-class="item['supplier']">
+								<img ng-src= "/image/{{item['supplier']}}.png"></img>
+							</span>
+						</td>
+						<td>
+							<a href='' ng-click="showImg(item['img'])" >{{item["name"]}}</a>
+						</td>
+						<td width='55px'>
+							<div ng-if="item['save'] != 0"> 
+								<font size='0.8em' >{{item["oldPrice"]}}</font>
+							</div>
+							<div>
+								<span class="string_price">{{item["newPrice"]}}</span>
+							</div>
+							<div ng-if="item['save'] != 0">
 								<font size='1.8em' >{{item["save"]}}% off</font>
-							</td>
-						</tr>
-					</table>
-				<!-- </a> -->
+							</div>
+						</td>
+						<td width='30px'>
+							<span class='big linkcolor' ng-click="addToList(item)"><i class="fa fa-plus-circle"></i></span>	
+						</td>
+				</table>
 			</li>
 		</ol>
 	</div>

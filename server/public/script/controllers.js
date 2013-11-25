@@ -165,7 +165,7 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
       }
 
       window.scrollTo(0,1) 
-      
+
       sortList();
 
       processExpire();
@@ -175,6 +175,7 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
 
     var sortList = function(){
       $scope.boughtList = _.sortBy($scope.boughtList, function(item){return item.order });
+      _.map($scope.list, function(item){if (item.order == -1) { item.order = ++itemOrder; }});
       $scope.list = _.sortBy($scope.list, function(item){return item.order});
     }
 
@@ -242,6 +243,21 @@ shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParam
       $scope.showSpinner = false;
     }
     
+    $scope.addToList = function(item){
+      var itemName = item["name"].itemlize();
+      if(localStorage[itemName] != undefined){
+        //already in the list for some reason, do nothing
+        return;
+      }
+      var dataStr = JSON.stringify({order: -1, bought:false, saving: [item]});
+      localStorage.setItem(itemName, dataStr);
+
+      var index = $scope.list.indexOf(item);
+      if (index > -1) {
+          $scope.list.splice(index, 1);
+      }
+    }
+
     var init = function(){
       var obj = JSON.parse(localStorage[$scope.item]);
       $scope.list = _.filter(obj.saving, function(obj){

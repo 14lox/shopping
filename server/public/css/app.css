@@ -54,6 +54,10 @@ and (min-width : 1224px) {
   }
 }
 
+a:hover{
+  text-decoration: none;
+}
+
 .wrap{
   width: 100%;
   margin: 2px;
@@ -127,7 +131,7 @@ input[type="checkbox"]:checked + label{
   width: 100%;
   height: 32px;
   font-size: 15px;
-  line-height: 32px;
+  /*line-height: 32px;*/
   border-bottom: 1px solid;
   border-bottom-color:#ff8810;
 }
@@ -160,7 +164,6 @@ input[type="checkbox"]:checked + label{
 
 .header a:hover{
   color: #0088cc;
-  text-decoration: none;
 }
 
 .header span{
@@ -192,7 +195,10 @@ input[type="checkbox"]:checked + label{
 
 a.saving:hover{
   color: red;
-  text-decoration: none;
+}
+
+.red{
+  color:red;
 }
 
 .savelist{
@@ -211,25 +217,26 @@ a.saving:hover{
   padding-left: 5px;
   font-size: 18px;
   font-style: italic;
-  margin-right: 38px;
-  width: 88%;
-  white-space: nowrap;
+  /*white-space: nowrap;
   overflow: hidden;
   -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis;*/
 }
 
 .main a{
-  color: #000;
+  color: #0088cc;
 }
 .main a:hover{
-  color: #000;
-  text-decoration: none;
+  color: #0088cc;
+}
+
+.name{
+  
+  max-width: 80%;
 }
 
 a:hover{
   color: #0088cc
-  text-decoration: none;
 }
 
 .bought{
@@ -239,6 +246,11 @@ a:hover{
 
 .center{
   text-align: center;
+}
+
+.right{
+  float: right;
+  padding-right: 10px;
 }
 .popover_close{
   padding-top: 14px;
@@ -303,4 +315,17 @@ a:hover{
   width: 100%;
   padding-top: 5px;
   padding-bottom: 5px;
+}
+
+.gray{
+  color: gray;
+}
+
+.linkcolor{
+  color: #0088cc;
+}
+
+.gift{
+  color: #0088cc;
+  font-size: 80%;
 }

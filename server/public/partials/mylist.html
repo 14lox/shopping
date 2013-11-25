@@ -15,19 +15,32 @@
 
 	<div class="wrap-list">
 		<ol class="list">
-			<li ng-repeat="item in list" ng-click='navTo(item["name"], item["save"])'> 
-				<div class='main'>
-					<input type='checkbox' ng-click="toggleBoughtItem(item['name'], true)"/>
-					{{item["name"]}}
-				</div>
+			<li ng-repeat="item in list"> 
+				<table width='100%'>
+					<tr>
+						<td ng-click='navTo(item["name"], item["save"])' class='main'>
+							<span class='name'> {{item["name"]}} </span>
+							<span ng-if='item["save"]'  class='gift'><i class="fa fa-gift"></i> </span>
+						</td>
+						<td width='30px'>
+							<span class='large right gray'>
+								<i class="fa fa-shopping-cart" ng-click="toggleBoughtItem(item['name'], true)" ></i>
+							</span>
+						</td>
+					</tr>
+				</table>
+				<!-- <div class='main' >
 
-				<a class='saving' ng-if='item["save"]' href='#/items/{{item["name"]}}'><i class="fa fa-gift"></i> </a>
-				
+					
+					
+					
+				</div>
+				 -->
 			</li>
 			<li/>
 			<li ng-repeat="item in boughtList"> 
 				<div class='main'>
-					<input type='checkbox' ng-click="toggleBoughtItem(item['name'], false)" checked/>
+					<a  href='' ng-click="toggleBoughtItem(item['name'], false)" ><i class="gray fa fa-undo"></i></a>
 					<span class='bought'>{{item["name"]}}</span>
 				</div>
 				<span class='remove' ng-click="removeItem(item['name'])"><i class="fa fa-times"></i> </span>
