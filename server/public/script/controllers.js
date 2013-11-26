@@ -299,6 +299,20 @@ shoppingAppControllers.controller('TopSavingsCtrl', ['$scope', '$http', 'activeS
       $scope.showSpinner = false;
     }
    
+    $scope.addToList = function(item){
+      var itemName = item["name"].itemlize();
+      if(localStorage[itemName] != undefined){
+        //already in the list for some reason, do nothing
+        return;
+      }
+      var dataStr = JSON.stringify({order: -1, bought:false, saving: [item]});
+      localStorage.setItem(itemName, dataStr);
+
+      var index = $scope.list.indexOf(item);
+      if (index > -1) {
+          $scope.list.splice(index, 1);
+      }
+    }
     
     $scope.loadMore = function(){
       var local = localStorage['topSavings'];
