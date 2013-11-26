@@ -14,36 +14,40 @@
 	</div>
 
 	<div class="wrap-list">
-		<ol class="list">
+		<ol class='savelist'>
 			<li ng-repeat="item in list"> 
 				<table width='100%'>
 					<tr>
-						<td ng-click='navTo(item["name"], item["save"])' class='main'>
+						<td ng-click='navTo(item["name"], item["save"])'>
 							<span class='name'> {{item["name"]}} </span>
-							<span ng-if='item["save"]'  class='gift'><i class="fa fa-gift"></i> </span>
+							<span ng-if='item["save"]' class='linkcolor'><i class="fa fa-gift"></i> </span>
 						</td>
 						<td width='30px'>
-							<span class='large right gray'>
+							<span class='big right green'>
 								<i class="fa fa-shopping-cart" ng-click="toggleBoughtItem(item['name'], true)" ></i>
 							</span>
 						</td>
 					</tr>
 				</table>
-				<!-- <div class='main' >
-
-					
-					
-					
-				</div>
-				 -->
 			</li>
-			<li/>
+			<li>
+				<div style='height:28px'/>
+			</li>
 			<li ng-repeat="item in boughtList"> 
-				<div class='main'>
-					<a  href='' ng-click="toggleBoughtItem(item['name'], false)" ><i class="gray fa fa-undo"></i></a>
-					<span class='bought'>{{item["name"]}}</span>
-				</div>
-				<span class='remove' ng-click="removeItem(item['name'])"><i class="fa fa-times"></i> </span>
+				<table width='100%'>
+					<tr>
+						<td width='30px' ng-click="toggleBoughtItem(item['name'], false)" >
+							<span class='left big gray' ><i class="gray fa fa-undo"></i></span>
+						</td>
+						<td>
+
+							<span class='bought'>{{item["name"]}}</span>
+						</td>
+						<td width='30px' ng-click="removeItem(item['name'])">
+							<span class='big right gray'><i class="fa fa-times"></i> </span>
+						</td>
+					</tr>
+				</table>	
 			</li>
 		</ol>
 	</div>

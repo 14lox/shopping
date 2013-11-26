@@ -213,26 +213,8 @@ a.saving:hover{
   float: right;
 }
 
-.main{
-  padding-left: 5px;
-  font-size: 18px;
-  font-style: italic;
-  /*white-space: nowrap;
-  overflow: hidden;
-  -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;*/
-}
-
-.main a{
-  color: #0088cc;
-}
-.main a:hover{
-  color: #0088cc;
-}
-
-.name{
-  
-  max-width: 80%;
+.name{ 
+  padding-left: 5px; 
 }
 
 a:hover{
@@ -325,7 +307,6 @@ a:hover{
   color: #0088cc;
 }
 
-.gift{
-  color: #0088cc;
-  font-size: 80%;
+.green{
+  color:green;
 }
