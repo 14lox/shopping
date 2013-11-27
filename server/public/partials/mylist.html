@@ -14,17 +14,21 @@
 	</div>
 
 	<div class="wrap-list">
-		<ol class='savelist'>
+		<ol class='list'>
 			<li ng-repeat="item in list"> 
-				<table width='100%'>
+				<table width='100%' border='0'>
 					<tr>
+						<td width='30px' ng-click="toggleBoughtItem(item['name'], true)">
+							<span class='gray'>
+								✔
+							</span>
+						</td>
 						<td ng-click='navTo(item["name"], item["save"])'>
-							<span class='name'> {{item["name"]}} </span>
-							<span ng-if='item["save"]' class='linkcolor'><i class="fa fa-gift"></i> </span>
+							<span class='name'> {{item["name"]}} </span>	
 						</td>
 						<td width='30px'>
-							<span class='big right green'>
-								<i class="fa fa-shopping-cart" ng-click="toggleBoughtItem(item['name'], true)" ></i>
+							<span ng-if='item["save"]' ng-click='navTo(item["name"], item["save"])' class='red'>
+								<i class="fa fa-gift"></i> 
 							</span>
 						</td>
 					</tr>
@@ -37,14 +41,13 @@
 				<table width='100%'>
 					<tr>
 						<td width='30px' ng-click="toggleBoughtItem(item['name'], false)" >
-							<span class='left big gray' ><i class="gray fa fa-undo"></i></span>
+							<span class='checked'>✔</span>
 						</td>
 						<td>
-
 							<span class='bought'>{{item["name"]}}</span>
 						</td>
 						<td width='30px' ng-click="removeItem(item['name'])">
-							<span class='big right gray'><i class="fa fa-times"></i> </span>
+							<span class='right gray'><i class="fa fa-times"></i> </span>
 						</td>
 					</tr>
 				</table>	

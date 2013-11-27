@@ -119,19 +119,18 @@ input[type="checkbox"]:checked + label{
   text-decoration: line-through;
   color: rgba(0,0,0,.3);
 }
+
 .list{
   list-style: none;
    background: rgb(255,228,138);
 }
-.list li:nth-child(odd){
-  background: rgb(255,228,138);
-}
+
 .list li{
-  vertical-align: middle;
-  width: 100%;
-  height: 32px;
   font-size: 15px;
-  /*line-height: 32px;*/
+
+  line-height: 28px;
+  text-align: center;
+  margin-top: 4px;
   border-bottom: 1px solid;
   border-bottom-color:#ff8810;
 }
@@ -172,7 +171,7 @@ input[type="checkbox"]:checked + label{
 
 #topsaving{
   float: right;
-  padding-right: 15px;
+  padding-right: 8px;
 }
 
 #config{
@@ -300,7 +299,7 @@ a:hover{
 }
 
 .gray{
-  color: gray;
+  color: #bbb;
 }
 
 .linkcolor{
@@ -309,4 +308,9 @@ a:hover{
 
 .green{
   color:green;
+}
+
+.checked{
+  color: green;
+  text-shadow: rgb(102, 153, 145) 0px 1px 0px;
 }
