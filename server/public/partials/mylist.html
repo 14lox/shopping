@@ -13,6 +13,21 @@
 		<img src='/image/spinner.gif' class='ajax-loader'/>
 	</div>
 
+	<div class='spinner' ng-if='showError'>
+		<div class="mymodal">
+		  <div class="modal-header">
+		    <button type="button" class="close" ng-click='closeError()' aria-hidden="true">&times;</button>
+		    <h3>Error</h3>
+		  </div>
+		  <div class="modal-body">
+		    <p>{{errMsg}}</p>
+		  </div>
+		  <div class="modal-footer">
+		    <a href="#" class="btn" ng-click='closeError()'>Close</a>
+		  </div>
+		</div>
+	</div>
+
 	<div class="wrap-list">
 		<ol class='list'>
 			<li ng-repeat="item in list"> 

@@ -23,7 +23,8 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
       if(_.some($scope.list, function(item){
         return item.name == $scope.newItem;
       })){
-       alert("item already exists in the list");
+        $scope.showError = true;
+        $scope.errMsg = "item already exists in the list";
        return;
      }
      if($scope.list.length == 0){
@@ -32,7 +33,7 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
      $scope.list.push({name:$scope.newItem, save:false});
 
      //reset newItem so the html input is cleared
-     $scope.query = $scope.newItem;
+     $scope.query = $scope.newItem;$('#myModal').modal(options)
      $scope.newItem = '';
 
       //set local storage
@@ -88,14 +89,19 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
       $http.post('/promotion/post_bulkquery', {queries: _.pluck($scope.list, 'name')}).
         success(bulk_query_succeeded).
         error(function(){
-          alert('Sorry, cannot refresh at the moment. Please try later');
           $scope.showSpinner = false;
+          $scope.showError = true;
+          $scope.errMsg = "Sorry, cannot refresh at the moment. Please try later";
         });
 
       $http.get('/promotion/topSavings').
       success(function(data, status, headers, config){
         localStorage["topSavings"] = JSON.stringify(data);
       });
+    };
+
+     $scope.closeError = function(){
+      $scope.showError = false;
     }
 
     //data format:  [{item: rice, promotions:[{},{}]}, {item: samlon, promotions:[]}]
@@ -246,7 +252,8 @@ shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParam
     $scope.addToList = function(item){
       var itemName = item["name"].itemlize();
       if(localStorage[itemName] != undefined){
-        //already in the list for some reason, do nothing
+         $scope.showError = true;
+         $scope.errMsg = "Item is already in your shopping list";
         return;
       }
       var dataStr = JSON.stringify({order: -1, bought:false, saving: [item]});
@@ -256,6 +263,10 @@ shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParam
       if (index > -1) {
           $scope.list.splice(index, 1);
       }
+    }
+
+     $scope.closeError = function(){
+      $scope.showError = false;
     }
 
     var init = function(){
@@ -302,7 +313,8 @@ shoppingAppControllers.controller('TopSavingsCtrl', ['$scope', '$http', 'activeS
     $scope.addToList = function(item){
       var itemName = item["name"].itemlize();
       if(localStorage[itemName] != undefined){
-        //already in the list for some reason, do nothing
+         $scope.showError = true;
+         $scope.errMsg = "Item is already in your shopping list";
         return;
       }
       var dataStr = JSON.stringify({order: -1, bought:false, saving: [item]});
@@ -312,6 +324,10 @@ shoppingAppControllers.controller('TopSavingsCtrl', ['$scope', '$http', 'activeS
       if (index > -1) {
           $scope.list.splice(index, 1);
       }
+    }
+
+     $scope.closeError = function(){
+      $scope.showError = false;
     }
     
     $scope.loadMore = function(){

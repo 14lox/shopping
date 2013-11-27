@@ -15,6 +15,8 @@ and (max-device-width : 1024px) {
   body, html {
     height: 100%;
   }
+
+
 }
 
 @media 
@@ -33,6 +35,7 @@ only screen and (min-device-pixel-ratio : 1.5)
   }
   body, html {
     height: 100%;
+    margin: 0px;
   }
 }
 
@@ -53,6 +56,32 @@ and (min-width : 1224px) {
     height: 780px;
   }
 }
+
+
+.mymodal{
+  width: 260px;
+  overflow: auto;
+  background-color: #ffffff;
+  border: 1px solid #999;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  *border: 1px solid #999;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+     -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -webkit-background-clip: padding-box;
+     -moz-background-clip: padding-box;
+          background-clip: padding-box;
+  display: inline-block;
+  margin-top: 20%;
+}
+
+.modal-header{
+  text-align: left;
+}
+
 
 a:hover{
   text-decoration: none;
