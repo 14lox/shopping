@@ -314,3 +314,7 @@ a:hover{
   color: green;
   text-shadow: rgb(102, 153, 145) 0px 1px 0px;
 }
+
+.tick{
+  font-size: 18px;
+}
