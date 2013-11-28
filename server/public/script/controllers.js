@@ -24,7 +24,7 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
         return item.name == $scope.newItem;
       })){
         $scope.showError = true;
-        $scope.errMsg = "item already exists in the list";
+        $scope.errMsg = "Item already exists in the list";
        return;
      }
      if($scope.list.length == 0){
@@ -33,7 +33,7 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
      $scope.list.push({name:$scope.newItem, save:false});
 
      //reset newItem so the html input is cleared
-     $scope.query = $scope.newItem;$('#myModal').modal(options)
+     $scope.query = $scope.newItem;
      $scope.newItem = '';
 
       //set local storage
