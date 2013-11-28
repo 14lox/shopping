@@ -335,7 +335,7 @@ shoppingAppControllers.controller('TopSavingsCtrl', ['$scope', '$http', '$timeou
       var local = localStorage['topSavings'];
       
       var savings = local == undefined ? [] : JSON.parse(localStorage['topSavings']); 
-
+      $scope.current_img = '/image/spinner.gif';
       $scope.showSpinner = true;
 
       $http.get('/promotion/topSavings?offset=' + savings.length).
@@ -359,6 +359,7 @@ shoppingAppControllers.controller('TopSavingsCtrl', ['$scope', '$http', '$timeou
     }
 
     var init = function(){
+      $scope.current_img = '/image/spinner.gif';
       $scope.showSpinner = true;
       $scope.list = [];
       $scope.allowMore = false;
