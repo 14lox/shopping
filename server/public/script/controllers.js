@@ -280,8 +280,8 @@ shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParam
     init();
   }]);
 
-shoppingAppControllers.controller('TopSavingsCtrl', ['$scope', '$http', 'activeSupplierService','$timeout'
-  function($scope, $http, activeSupplierService) {
+shoppingAppControllers.controller('TopSavingsCtrl', ['$scope', '$http', '$timeout','activeSupplierService', 
+  function($scope, $http, $timeout, activeSupplierService) {
     
     $scope.list = [];
     $scope.allowMore = true;
@@ -360,6 +360,8 @@ shoppingAppControllers.controller('TopSavingsCtrl', ['$scope', '$http', 'activeS
 
     var init = function(){
       $scope.showSpinner = true;
+      $scope.list = [];
+      $scope.allowMore = false;
       $timeout(function() {
           var local = localStorage['topSavings'];
           if(local == undefined){
