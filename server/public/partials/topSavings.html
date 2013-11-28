@@ -3,13 +3,14 @@
 			<a  id='back' href='#/mylist'><i class="fa fa-arrow-circle-left"></i></a>
 			<span>Top Savings</span>
 		</div>
+
 		<div class='spinner' ng-if='showSpinner'>
-			<img ng-src='{{current_img}}' class='ajax-loader'/>
+			<img src='/image/spinner.gif' class='ajax-loader'/>
 			<div class='popover_close'>
 				<a href='' ng-click="hideSpinner()"> <i class="fa fa-times-circle big"></i>  </a>
 			</div>
 		</div>
-
+		
 		<div class='spinner' ng-if='showError'>
 		<div class="mymodal">
 		  <div class="modal-header">
@@ -25,7 +26,7 @@
 		</div>
 	</div>
 	
-	
+
 		<div class="wrap-list">
 			<ol class='savelist'>
 				<li ng-repeat="item in list">

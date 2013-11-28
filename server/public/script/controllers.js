@@ -34,6 +34,7 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
 
      //reset newItem so the html input is cleared
      $scope.query = $scope.newItem;
+
      $scope.newItem = '';
 
       //set local storage
@@ -279,7 +280,7 @@ shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParam
     init();
   }]);
 
-shoppingAppControllers.controller('TopSavingsCtrl', ['$scope', '$http', 'activeSupplierService',
+shoppingAppControllers.controller('TopSavingsCtrl', ['$scope', '$http', 'activeSupplierService','$timeout'
   function($scope, $http, activeSupplierService) {
     
     $scope.list = [];
@@ -335,38 +336,45 @@ shoppingAppControllers.controller('TopSavingsCtrl', ['$scope', '$http', 'activeS
       
       var savings = local == undefined ? [] : JSON.parse(localStorage['topSavings']); 
 
+      $scope.showSpinner = true;
+
       $http.get('/promotion/topSavings?offset=' + savings.length).
       success(function(data, status, headers, config){
         savings = savings.concat(data);
         localStorage["topSavings"] = JSON.stringify(savings);
 
-        if(savings.length >= 500)
-        {  
-          $scope.allowMore = false;
-          return;
-        }
-
         $scope.list = _.filter(savings, function(obj){
           return activeSupplierService.isSupplierActive(obj['supplier']);
         });
+
+        $scope.showSpinner = false;
+
+        if(savings.length >= 500)
+        {  
+          $scope.allowMore = false;
+        }
 
       });
 
     }
 
     var init = function(){
-      var local = localStorage['topSavings'];
-      if(local == undefined){
-        return $scope.loadMore();
-      }
+      $scope.showSpinner = true;
+      $timeout(function() {
+          var local = localStorage['topSavings'];
+          if(local == undefined){
+            return $scope.loadMore();
+          }
 
-      var savings = JSON.parse(local);
-      $scope.allowMore = savings.length < 500;
-      $scope.list = _.filter(savings, function(obj){
-        return activeSupplierService.isSupplierActive(obj['supplier']);
-      });
-    };
+          var savings = JSON.parse(local);
+          $scope.allowMore = savings.length < 500;
+          $scope.list = _.filter(savings, function(obj){
+            return activeSupplierService.isSupplierActive(obj['supplier']);
+          });
 
+          $scope.showSpinner = false;
+        });
+    }
 
 
     init();
