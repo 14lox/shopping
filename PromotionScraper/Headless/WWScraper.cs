@@ -103,7 +103,7 @@ namespace Headless
 			var img = imgNode.GetAttributeValue("src", "").Replace("/small/", "/big/");
 			img = img.MakeAbsoluteUrl(host);
 
-			var content = string.Format("{0},{1},{2},{3},{4}", prodNameNode.Text(), priceNode.Text(), originalPriceNode.Text(), link, img);
+			var content = string.Format("{0},{1},{2},{3},{4}", HttpUtility.HtmlDecode(prodName), priceNode.Text(), originalPriceNode.Text(), link, img);
 			sw.WriteLine(content);
 			count++;
 			return true;
