@@ -41,6 +41,15 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.get('/cache.manifest', function(req, res){
+  res.setHeader('Content-Type', 'text/cache-manifest');
+  fs.readFile('cache.manifest', 'utf8', function(err, data) {
+    if (err) throw err;
+    res.end(data);
+  });
+  
+});
+
 app.get('/', function (req, res, next) {
     require("./routes/index").index(req, res);
 });
