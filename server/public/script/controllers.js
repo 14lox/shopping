@@ -400,8 +400,8 @@ shoppingAppControllers.controller('TopSavingsCtrl', ['$scope', '$http', '$timeou
   }]);
 
 
-shoppingAppControllers.controller('ConfigCtrl', ['$scope', 'activeSupplierService',
-  function($scope,activeSupplierService) {
+shoppingAppControllers.controller('ConfigCtrl', ['$scope', 'activeSupplierService','$window'
+  function($scope,activeSupplierService, $window) {
     //this should be a global config for all the supported suppliers
     
 
@@ -414,6 +414,9 @@ shoppingAppControllers.controller('ConfigCtrl', ['$scope', 'activeSupplierServic
 
     $scope.toggleActive = function(supplier){
       activeSupplierService.toggleActive(supplier);
+    }
 
+    $scope.navTo = function(url){
+      $window.location.href = url;
     }
   }]);
