@@ -379,7 +379,12 @@ shoppingAppControllers.controller('TopSavingsCtrl', ['$scope', '$http', '$timeou
       $scope.showSpinner = true;
       $scope.list = [];
       $scope.allowMore = false;
-      $timeout(function() {
+    }
+
+
+    init();
+
+    $timeout(function() {
           var local = localStorage['topSavings'];
           if(local == undefined){
             return $scope.loadMore();
@@ -393,10 +398,6 @@ shoppingAppControllers.controller('TopSavingsCtrl', ['$scope', '$http', '$timeou
 
           $scope.showSpinner = false;
         });
-    }
-
-
-    init();
   }]);
 
 
