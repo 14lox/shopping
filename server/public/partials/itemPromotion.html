@@ -1,6 +1,6 @@
 <div class="wrap">
 	<div class="header">
-		<a  id='back' href='#/mylist'><i class="fa fa-arrow-circle-left"></i></a>
+		<img id='back' src='image/back.png' ng-click="navTo('#/mylist')"/>
 		<span>Promotions</span>
 	</div>
 	<div class='spinner' ng-if='showSpinner'>
@@ -50,7 +50,7 @@
 							</div>
 						</td>
 						<td width='30px' ng-click="addToList(item)">
-							<span class='big linkcolor'><i class="fa fa-plus-circle"></i></span>	
+							<img src='image/add.png'/>	
 						</td>
 				</table>
 			</li>

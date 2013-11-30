@@ -1,14 +1,13 @@
 CACHE MANIFEST
 
-# rev 2
+# rev 3
 
 NETWORK:
 *
 
 CACHE:
-/css/bootstrap.css
+/css/bootstrap.min.css
 /css/app.css
-/css/font-awesome.min.css
 /script/lib/jquery.min.js
 /script/angular/angular.min.js
 /script/angular/angular-route.min.js
@@ -21,11 +20,11 @@ CACHE:
 /script/directives.js
 /script/services.js
 /script/util.js
-/fonts/fontawesome-webfont.eot
-/fonts/fontawesome-webfont.svg
-/fonts/fontawesome-webfont.ttf
-/fonts/fontawesome-webfont.woff
-/fonts/FontAwesome.otf
+/image/add.png
+/image/delete.png
+/image/back.png
+/image/favorites.png
+/image/settings.png
 /image/Coles.png
 /image/Wollies.png
 /image/spinner.gif

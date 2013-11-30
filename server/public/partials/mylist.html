@@ -1,9 +1,24 @@
 <div class="wrap">
 	<div class="header">
-		<input type="text" id="item" ng-model='newItem' required ng-trim='true' ng-enter='addItem()'></input>
-		<a  class='left' href="" ng-click="addItem()"><i class="fa fa-plus-circle"></i></a>
-		<a id='config' href="#/config"><i class="fa fa-wrench"></i></a>
-		<a id='topsaving' href="#/topsavings"><i class="fa fa-thumbs-o-up"></i></a>
+		<table width='100%' border='0'>
+			<tr>
+				<td id='celladd'>
+					<input type="text" id="item" ng-model='newItem' required ng-trim='true' ng-enter='addItem()'  placeholder="Item to buy"></input>
+					<img src='image/add.png' ng-click="addItem()"/>
+				</td>
+				<td>&nbsp; &nbsp;</td>
+				<td width = '38px'>
+					<img src='image/favorites.png' ng-click="navTo('#/topsavings')"/>
+				</td>
+				<td width = '38px'>
+					<img src='image/settings.png' ng-click="navTo('#/config')"/>
+				</td>
+				
+			</tr>
+		</table>
+		<!-- <a  class='left' href="" ng-click="addItem()"><i class="fa fa-plus-circle"></i></a> -->
+		
+		
 	</div>
 	<div class="alert alert-warning alert-dismissable center" ng-if='isExpired'>
 	  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -38,12 +53,15 @@
 								✔
 							</span>
 						</td>
-						<td ng-click='navTo(item["name"], item["save"])'>
+						<td ng-if='item["save"]' ng-click='navTo("#/items/{{item["name"]}}")'>
+							<span class='name'> {{item["name"]}} </span>	
+						</td>
+						<td ng-if='item["save"] == false'>
 							<span class='name'> {{item["name"]}} </span>	
 						</td>
 						<td width='30px'>
-							<span ng-if='item["save"]' ng-click='navTo(item["name"], item["save"])' class='red'>
-								<i class="fa fa-gift"></i> 
+							<span ng-if='item["save"]' ng-click='navTo("#/items/{{item["name"]}}")' class='red'>
+								<img class='offer' src='image/offer.png'>
 							</span>
 						</td>
 					</tr>
@@ -62,7 +80,7 @@
 							<span class='bought'>{{item["name"]}}</span>
 						</td>
 						<td width='30px' ng-click="removeItem(item['name'])">
-							<span class='right gray'><i class="fa fa-times"></i> </span>
+							<img class='offer' src='image/delete.png'>
 						</td>
 					</tr>
 				</table>	

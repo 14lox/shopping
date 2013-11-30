@@ -27,6 +27,15 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
         $scope.errMsg = "Item already exists in the list";
        return;
      }
+
+     if(_.some($scope.boughtList, function(item){
+        return item.name == $scope.newItem;
+      })){
+        $scope.showError = true;
+        $scope.errMsg = "Item already exists in the boutght list, you can revert it to shopping list.";
+       return;
+     }
+
      if($scope.list.length == 0){
       setLastUpdateTime();
      }
@@ -79,10 +88,8 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
       localStorage.setItem(item.itemlize(), JSON.stringify(local));
       };
 
-    $scope.navTo = function(itemName, hasSave){
-       if(hasSave){
-          $window.location.href = '#/items/' + itemName
-       }
+    $scope.navTo = function(url){
+      $window.location.href = url;
     }
 
     $scope.refresh = function(){
@@ -220,8 +227,8 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
 
     }]);
 
-shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParams', 'activeSupplierService',
-  function($scope, $routeParams, activeSupplierService) {
+shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParams', 'activeSupplierService','$window',
+  function($scope, $routeParams, activeSupplierService, $window) {
     $scope.item = $routeParams.itemId.itemlize();
     $scope.list = [];
     $scope.current_img = '';
@@ -270,6 +277,11 @@ shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParam
       $scope.showError = false;
     }
 
+    $scope.navTo = function(url){
+      $window.location.href = url;
+    }
+
+
     var init = function(){
       var obj = JSON.parse(localStorage[$scope.item]);
       $scope.list = _.filter(obj.saving, function(obj){
@@ -280,8 +292,8 @@ shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParam
     init();
   }]);
 
-shoppingAppControllers.controller('TopSavingsCtrl', ['$scope', '$http', '$timeout','activeSupplierService', 
-  function($scope, $http, $timeout, activeSupplierService) {
+shoppingAppControllers.controller('TopSavingsCtrl', ['$scope', '$http', '$timeout','activeSupplierService', '$window',
+  function($scope, $http, $timeout, activeSupplierService, $window) {
     
     $scope.list = [];
     $scope.allowMore = true;
@@ -356,6 +368,10 @@ shoppingAppControllers.controller('TopSavingsCtrl', ['$scope', '$http', '$timeou
 
       });
 
+    }
+
+    $scope.navTo = function(url){
+      $window.location.href = url;
     }
 
     var init = function(){
