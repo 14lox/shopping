@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-# rev 3
+# rev 4
 
 NETWORK:
 *
@@ -23,6 +23,7 @@ CACHE:
 /image/add.png
 /image/delete.png
 /image/close.png
+/image/offer.png
 /image/back.png
 /image/favorites.png
 /image/settings.png
