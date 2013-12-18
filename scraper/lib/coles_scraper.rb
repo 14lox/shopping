@@ -136,9 +136,3 @@ class PageInfoFinder < Nokogiri::XML::SAX::Document
     {:pageSize=> @page_size, :storeId=> @store_id, :catalogId=> @catalog_id, :categoryId=> @category_id}
   end
 end
-
-
-# cole_scraper = ColesScraper.new
-# cole_scraper.get_post_query
-# cole_scraper.get_data
-# cole_scraper.write

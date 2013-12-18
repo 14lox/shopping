@@ -22,7 +22,7 @@ class WwScraper
 
   def get_data
     @data = []
-    page_number = 1#get_page_number
+    page_number = get_page_number
     (1..page_number).each do |n|
       url = "http://www2.woolworthsonline.com.au/Shop/Specials?page=#{n}&_mode=ajax&_ajaxsource=content-panel";
       response = HTTParty.get(url)
@@ -74,8 +74,6 @@ class WwScraper
 end
 
 
-s = WwScraper.new
-s.get_data
-s.write
+
 
 
