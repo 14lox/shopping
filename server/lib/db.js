@@ -3,7 +3,7 @@ var mysql = require('mysql')
 ,Q = require('q');
 
 var pool  = mysql.createPool({
-   host     : '54.252.90.204',
+   host     : '54.253.248.42',
    user     : 'harrygao',
    password : 'topview1',
    database : 'promotion',
