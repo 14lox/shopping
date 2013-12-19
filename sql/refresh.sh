@@ -1,7 +1,7 @@
 echo "---------------clear the Current table"
 mysql -u "harrygao" -ptopview1 "promotion" < clearCurrent.sql
 echo "---------------insert new data"
-mysql -u "harrygao" -ptopview1 "promotion" < insert.sql
+mysql -u "harrygao" -ptopview1 "promotion" < ../scraper/insert.sql
 mysql -u "harrygao" -ptopview1 "promotion" < updateTime.sql
 echo "---------------stop searchd"
 sudo /usr/local/sphinx/bin/searchd --stop
