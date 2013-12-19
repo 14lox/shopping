@@ -24,7 +24,7 @@ var func = function(){
     	case 'product' :
     		return {
                 cookieSecret: '342kfsdakj'
-                , port : '8080'
+                , port : '80'
     		};
 
     	default:
