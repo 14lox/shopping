@@ -1,0 +1,1 @@
+insert into promotion.UpdateHistory (updateTime) VALUES (unix_timestamp());

@@ -47,7 +47,7 @@ class WwScraper
         name = HTMLEntities.new.decode(prod_name_node.inner_text.strip)
        
         img = img_node.inner_text.strip.gsub(/\/small\//, "/big/");
-        img = "www2.woolworthsonline.com.au#{img}"
+        img = "http://www2.woolworthsonline.com.au#{img}"
 
         now = price_node.inner_text.strip.match(/\$(\d+\.\d+)/)[1]
         was = original_price_node.inner_text.strip.match(/\$(\d+\.\d+)/)[1]
