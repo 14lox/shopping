@@ -108,7 +108,7 @@ getPromotionContent = function(match,callback){
 generateQueryFunc = function(query){
 	return function(callback){
 		var cl = new SphinxClient();
-		cl.SetServer('54.252.90.204', 9312);
+		cl.SetServer('54.253.248.42', 9312);
 		cl.SetLimits(0, 50);
 		cl.Query(query, function(err, result) {
 				if(err){
