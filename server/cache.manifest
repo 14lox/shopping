@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-# rev 4
+# rev 5
 
 NETWORK:
 *
@@ -30,6 +30,7 @@ CACHE:
 /image/Coles.png
 /image/Wollies.png
 /image/spinner.gif
+/image/favicon.ico
 /partials/config.html
 /partials/itemPromotion.html
 /partials/mylist.html
