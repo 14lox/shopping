@@ -36,10 +36,10 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
-app.use(function (req, res, next) {
-    console.log('new request from ' + req.path);
-    next();
-});
+// app.use(function (req, res, next) {
+//     console.log('new request from ' + req.path);
+//     next();
+// });
 
 app.get('/cache.manifest', function(req, res){
   res.setHeader('Content-Type', 'text/cache-manifest');

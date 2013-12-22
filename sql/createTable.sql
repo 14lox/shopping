@@ -31,3 +31,19 @@ CREATE TABLE  `promotion`.`UpdateHistory` (
   `updateTime` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8
+
+
+CREATE TABLE `promotion`.`Items` (
+  `id` INT,
+  `name` TEXT NOT NULL,
+  PRIMARY KEY (`id`)
+)
+CHARACTER SET utf8;
+
+CREATE TABLE  `promotion`.`QueryHistory` (
+  `id` bigint(20) unsigned NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `time` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+

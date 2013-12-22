@@ -13,16 +13,41 @@ exports.post_query = function(req, res, next){
 	cl.SetLimits(0, 50);
 	var query = req.body.query;
 
+	
 	cl.Query(query, function(err, result) {
 		if(err){
 			res.send(500, { error: 'something blew up' });
 			return;
 		}
-		async.map(result.matches, getPromotionContent, function(err,results){
-			results = results.sort(function(item1, item2){return item1.save - item2.save}).reverse();
-			res.send({item: query, promotions: results});	
-		});
+
+		if(result.matches.count == 0)
+		{
+			res.send({});
+			return;
+		}
+
+		Db.runQuery('SELECT supplierId, name, newPrice, oldPrice, save, img from Current where id in (' + _.pluck(result.matches, "id").join(',') + ');')
+		.then(function(results){
+				results = results.sort(function(item1, item2){return item1.save - item2.save}).reverse();
+				results = results.map(function(r){ 
+					return {
+						"supplier" : helper.getSupplier(r.supplierId),
+						"name" : r.name,
+						"newPrice" : r.newPrice,
+						"oldPrice" : r.oldPrice,
+						"save": r.save,
+						"img" : r.img
+					}
+				});
+				res.send({item: query, promotions: results});	
+		})
+		.done();
 	});
+
+	//record the query into database
+	mysql_time = new Date().toISOString().slice(0, 19).replace('T', ' ');
+	Db.runQuery('insert into QueryHistory (name, querytime) values ("' + query + '","' + mysql_time + '");').done();
+
 }
 
 exports.post_bulkquery = function(req, res, next){
@@ -90,21 +115,6 @@ exports.topSavings = function(req, res, next){
 	.done();
 }
 
-getPromotionContent = function(match,callback){
-	var query = 'SELECT name, newPrice, oldPrice, save, img from Current where id = ' + match.id;
-	Db.runQuery(query)
-	.then(function(result){
-		callback(null,{"supplier" : helper.getSupplier(match.attrs.supplierid), 
-						"name" : result[0].name,
-						"newPrice" : result[0].newPrice,
-						"oldPrice" : result[0].oldPrice,
-						"save" : result[0].save,
-						"img" : result[0].img});
-	})
-	.done();
-
-}
-
 generateQueryFunc = function(query){
 	return function(callback){
 		var cl = new SphinxClient();
@@ -115,11 +125,29 @@ generateQueryFunc = function(query){
 					res.send(500, { error: 'something blew up' });
 					return;
 				}
-				async.map(result.matches, getPromotionContent, function(err,results){
-					results = results.sort(function(item1, item2){return item1.save - item2.save}).reverse();
 
-			 		callback(err, {item: query, promotions: results});	
-				});
+				if(result.matches.length == 0)
+				{
+					callback(null, {});
+					return;
+				}
+
+				Db.runQuery('SELECT supplierId, name, newPrice, oldPrice, save, img from Current where id in (' + _.pluck(result.matches, "id").join(',') + ');')
+				.then(function(results){
+						results = results.sort(function(item1, item2){return item1.save - item2.save}).reverse();
+						results = results.map(function(r){ 
+							return {
+								"supplier" : helper.getSupplier(r.supplierId),
+								"name" : r.name,
+								"newPrice" : r.newPrice,
+								"oldPrice" : r.oldPrice,
+								"save": r.save,
+								"img" : r.img
+							}
+						});
+						callback(null, {item: query, promotions: results});	
+				})
+				.done();
 		});
 	}
 }
