@@ -46,19 +46,17 @@
 			<li ng-repeat="item in list"> 
 				<table width='100%' border='0'>
 					<tr>
-						<td width='30px' ng-click="toggleBoughtItem(item['name'], true)">
-							<span class='gray tick'>
-								✔
-							</span>
+						<td width='30px' ng-click="removeItem(item['name'])">
+							<img class='offer' src='image/delete.png'>
 						</td>
-						<td ng-if='item["save"]' ng-click='navTo("#/items/{{item["name"]}}")'>
+						<td ng-if='item["save"]' ng-click='showItem("{{item["name"]}}")'>
 							<span class='name'> {{item["name"]}} </span>	
 						</td>
 						<td ng-if='item["save"] == false'>
 							<span class='name'> {{item["name"]}} </span>	
 						</td>
 						<td width='30px'>
-							<span ng-if='item["save"]' ng-click='navTo("#/items/{{item["name"]}}")' class='red'>
+							<span ng-if='item["save"]' ng-click='showItem("{{item["name"]}}")' class='red'>
 								<img class='offer' src='image/offer.png'>
 							</span>
 						</td>

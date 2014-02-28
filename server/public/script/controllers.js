@@ -53,14 +53,14 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
       $http.post('/promotion/post_query', {query: $scope.query}).success(query_succeeded);
     };
 
-    
+
     $scope.removeItem = function(item){
-      var obj = _.find($scope.boughtList, function(element){
+      var obj = _.find($scope.list, function(element){
         return element.name == item;
       });
-      var idx = _.indexOf($scope.boughtList, obj);
+      var idx = _.indexOf($scope.list, obj);
       //remove from list
-      $scope.boughtList.splice(idx, 1);
+      $scope.list.splice(idx, 1);
 
       //set local storage
       localStorage.removeItem(item.itemlize());
@@ -88,6 +88,11 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
       localStorage.setItem(item.itemlize(), JSON.stringify(local));
       };
 
+    $scope.showItem = function(itemName){
+        var url = "#/items/" + itemName 
+        $scope.navTo(encodeURI(url));
+    }
+    
     $scope.navTo = function(url){
       $window.location.href = url;
     }
@@ -258,7 +263,7 @@ shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParam
     }
     
     $scope.addToList = function(item){
-      var itemName = item["name"].itemlize();
+      var itemName = ('[' +item["supplier"] + '] ' + item["name"]).itemlize();
       if(localStorage[itemName] != undefined){
          $scope.showError = true;
          $scope.errMsg = "Item is already in your shopping list";
@@ -324,7 +329,7 @@ shoppingAppControllers.controller('TopSavingsCtrl', ['$scope', '$http', '$timeou
     }
    
     $scope.addToList = function(item){
-      var itemName = item["name"].itemlize();
+      var itemName = ('[' +item["supplier"] + '] ' + item["name"]).itemlize();
       if(localStorage[itemName] != undefined){
          $scope.showError = true;
          $scope.errMsg = "Item is already in your shopping list";
