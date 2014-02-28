@@ -10,7 +10,9 @@ var shoppingApp = angular.module('shoppingApp', [
   //'$strap.directives',
   'shoppingDirectives',
   'shoppingServices'
-]);
+]).run(function() {
+    FastClick.attach(document.body);
+  });
 
 shoppingApp.config(['$routeProvider',
   function($routeProvider) {
