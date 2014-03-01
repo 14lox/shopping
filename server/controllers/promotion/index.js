@@ -115,6 +115,11 @@ exports.topSavings = function(req, res, next){
 	.done();
 }
 
+exports.serverMessage = function(req, res, next){
+	res.send('no message');
+	return;
+}
+
 generateQueryFunc = function(query){
 	return function(callback){
 		var cl = new SphinxClient();

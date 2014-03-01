@@ -92,7 +92,7 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
         var url = "#/items/" + itemName 
         $scope.navTo(encodeURI(url));
     }
-    
+
     $scope.navTo = function(url){
       $window.location.href = url;
     }
@@ -190,7 +190,18 @@ shoppingAppControllers.controller('MyListCtrl', ['$scope', '$http', '$window', '
       processExpire();
 
       getTopSavings();
+
+      showServerMessageIfAny();
     };
+
+    var showServerMessageIfAny = function(){
+      $http.get('/promotion/serverMessage').
+      success(function(data){
+        if(data != ''){
+          alert(data)
+        }
+      });
+    }
 
     var sortList = function(){
       $scope.boughtList = _.sortBy($scope.boughtList, function(item){return item.order });
