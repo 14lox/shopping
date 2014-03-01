@@ -1,1 +1,1 @@
-sudo NODE_ENV=product forever start  -l log.log server.js --minUptime=2000
+sudo NODE_ENV=product forever start -a -l log.log server.js --minUptime=2000
