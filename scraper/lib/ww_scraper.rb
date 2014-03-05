@@ -15,8 +15,11 @@ class WwScraper
     pos = content.index('<a', pos)
     pos = content.index('>', pos)
     pos2 = content.index('<', pos)
-    content.slice(pos+1, pos2-pos-1).to_i
+    number = content.slice(pos+1, pos2-pos-1).to_i
+    puts "Total page number is #{number}"
+    number
   rescue
+    puts "error occured in getting page number"
     0
   end
 
@@ -24,6 +27,7 @@ class WwScraper
     @data = []
     page_number = get_page_number
     (1..page_number).each do |n|
+      puts "Getting page #{n}, item count is #{@data.count} "
       url = "http://www2.woolworthsonline.com.au/Shop/Specials?page=#{n}&_mode=ajax&_ajaxsource=content-panel";
       response = HTTParty.get(url)
       doc = Nokogiri::XML::Document.parse(response.body)
