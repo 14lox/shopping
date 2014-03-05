@@ -27,12 +27,12 @@ class ColesScraper
     beginIndex = 0;
     has_more = true;
     pageSize = @query_body[:pageSize].to_i
-    pageIndex = 1;
     header = {"Content-Type" => "application/x-www-form-urlencoded"}
     while  has_more
       puts "beginIndex is #{beginIndex}, data count is #{data.length}"
       @query_body['beginIndex'] = beginIndex
-      response = HTTParty.post('http://shop.coles.com.au/online/national/specials-offers/ColesCategoryView', :body => @query_body)
+      puts "#{@query_body}"
+      response = HTTParty.post('http://shop.coles.com.au/online/national/specials-offers/ColesCategoryView', :header => header, :body => @query_body)
       doc = Nokogiri::XML::Document.parse(response.body)
       has_more = get_data_from_xml_doc(doc)
       #has_more = false
