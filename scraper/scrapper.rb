@@ -8,8 +8,9 @@ begin
   cole_scraper.get_post_query
   cole_scraper.get_data
   cole_scraper.write
-rescue
+rescue Exception => e
   puts "an error occured in coles scrapper"
+  puts "#{e.message}"
 end
 
 begin
@@ -17,8 +18,9 @@ begin
   s = WwScraper.new
   s.get_data
   s.write
-rescue
-  puts "an error occured in coles scrapper"
+rescue Exception => e
+  puts "an error occured in Woolworth scrapper"
+  puts "#{e.message}"
 end
 
 
