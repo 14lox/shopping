@@ -116,7 +116,7 @@ exports.topSavings = function(req, res, next){
 }
 
 exports.serverMessage = function(req, res, next){
-	res.send('no message');
+	res.send('');
 	return;
 }
 
