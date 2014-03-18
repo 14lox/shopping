@@ -31,13 +31,22 @@ class ColesScraper
     while  has_more
       puts "beginIndex is #{beginIndex}, data count is #{data.length}"
       @query_body['beginIndex'] = beginIndex
-      puts "#{@query_body}"
-      response = HTTParty.post('http://shop.coles.com.au/online/national/specials-offers/ColesCategoryView', :header => header, :body => @query_body)
-      doc = Nokogiri::XML::Document.parse(response.body)
+      doc = get_xml_doc(header)
       has_more = get_data_from_xml_doc(doc)
       #has_more = false
       beginIndex += pageSize
     end
+  end
+
+  def get_xml_doc(header) 
+    5.times do
+      response = HTTParty.post('http://shop.coles.com.au/online/national/specials-offers/ColesCategoryView', :header => header, :body => @query_body)
+      doc = Nokogiri::XML::Document.parse(response.body)
+      return doc unless doc.root == nil
+      puts 'post to coles failed, try again'
+      sleep 5
+    end
+    return
   end
 
   def get_data_from_xml_doc(doc)
@@ -62,7 +71,7 @@ class ColesScraper
         info = get_info_from_social_node(social_node)
         @data.push({was:was, now:now}.merge(info)) if info != {}
       rescue
-        LOGGER.error("find an exception node $!")
+        LOGGER.error("find an exception node #{$!}")
       end
     end
   end
