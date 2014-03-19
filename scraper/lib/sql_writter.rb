@@ -1,6 +1,6 @@
 class SqlWritter
   def self.write
-    File.open(File.join(File.dirname(__FILE__), '..', '..', 'sql' 'insert.sql', 'w') do |file|
+    File.open(File.join(File.dirname(__FILE__), '..', '..', 'sql' 'insert.sql'), 'w') do |file|
       CSV.read(File.join(File.dirname(__FILE__),'coles.csv'), encoding: "UTF-8").each { |row| write_row(file, row, 1) }#coles supplier id is 1
       CSV.read(File.join(File.dirname(__FILE__),'ww.csv'), encoding: "UTF-8").each { |row| write_row(file, row, 2) }#Wollies supplier id is 1
     end
