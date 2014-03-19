@@ -1,1 +1,1 @@
-delete from Current where id > 0;
+delete from promotion.Current where id > 0;
