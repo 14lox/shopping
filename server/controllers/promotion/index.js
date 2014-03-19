@@ -133,7 +133,7 @@ generateQueryFunc = function(query){
 
 				if(result.matches.length == 0)
 				{
-					callback(null, {});
+					callback(null, {item: query, promotions: null});
 					return;
 				}
 
