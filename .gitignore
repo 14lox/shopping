@@ -1,2 +1,7 @@
 **/node_modules
 **/.DS_Store
+scraper/insert.sql
+scraper/lib/coles.csv
+scraper/lib/ww.csv
+server/public/image/splash.jpg
+server/public/image/splash.png
