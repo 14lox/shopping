@@ -20,7 +20,7 @@ exports.post_query = function(req, res, next){
 			return;
 		}
 
-		if(result.matches.count == 0)
+		if(result.matches.length == 0)
 		{
 			res.send({});
 			return;
