@@ -4,14 +4,22 @@ require 'logger'
 require 'csv'
 require 'htmlentities'
 
-class WwScraper
+class WwCrawler
+  def initialize(category, url)
+    @category = category
+    @url = url
+    @data = []
+  end
+
+
   def get_page_number
-    response = HTTParty.get('http://www2.woolworthsonline.com.au/Shop/Specials')
+    response = HTTParty.get(@url)
     content = response.body
+    puts content
     #string search on <li class="page-ellipses">...</li>
     #        <li class="page-number">
     #            <a href="/Shop/Specials?page=192" class="_jumpTop">192</a>
-    pos = content.index('<li class="page-ellipses">')
+    pos = content.rindex('<li class="page-number')
     pos = content.index('<a', pos)
     pos = content.index('>', pos)
     pos2 = content.index('<', pos)
@@ -23,12 +31,12 @@ class WwScraper
     0
   end
 
-  def get_data
+  def crawl
     @data = []
     page_number = get_page_number
     (1..page_number).each do |n|
       puts "Getting page #{n}, item count is #{@data.count} "
-      url = "http://www2.woolworthsonline.com.au/Shop/Specials?page=#{n}&_mode=ajax&_ajaxsource=content-panel";
+      url = @url + "?page=#{n}&_mode=ajax&_ajaxsource=content-panel";
       response = HTTParty.get(url)
       doc = Nokogiri::XML::Document.parse(response.body)
       node = doc.root.xpath('.//div[@id="content-panel"]')
@@ -36,6 +44,7 @@ class WwScraper
       #puts content_node
       get_data_from_content_node content_node
     end
+    write
   end
 
   def get_data_from_content_node content_node
@@ -57,6 +66,7 @@ class WwScraper
         was = original_price_node.inner_text.strip.match(/\$(\d+\.\d+)/)[1]
 
         info = {}
+        info[:category] = @category
         info[:was] = was   
         info[:now] = now   
         info[:img] = img
@@ -68,7 +78,7 @@ class WwScraper
   end
 
   def write
-    CSV.open(File.join(File.dirname(__FILE__),'ww.csv'), "wb") do |csv|
+    CSV.open(File.join(File.dirname(__FILE__),'ww.csv'), "ab") do |csv|
       @data.each do |item|
         csv << item.values
       end

@@ -6,23 +6,19 @@ require 'csv'
 LOGGER = Logger.new(STDOUT)
 LOGGER.level = Logger::WARN
 
-class ColesScraper
+class ColesCrawler
   attr_reader :data
 
-  def initialize
+  def initialize(category, url)
+    @category = category
+    @url = url
     @data = []
   end
 
-  def get_post_query
-    response = HTTParty.get('http://shop.coles.com.au/online/national/specials-offers/specials-offers')
-    page_info_finder = PageInfoFinder.new
-    parser = Nokogiri::HTML::SAX::Parser.new(page_info_finder)
-    parser.parse(response.body)
-    @query_body = page_info_finder.query_body
-    #puts @query_body.inspect
-  end
+  def crawl
+    puts 'coles pending'; return
+    get_post_query
 
-  def get_data
     @data = []
     beginIndex = 0;
     has_more = true;
@@ -31,12 +27,25 @@ class ColesScraper
     while  has_more
       puts "beginIndex is #{beginIndex}, data count is #{data.length}"
       @query_body['beginIndex'] = beginIndex
+      puts "query_body is #{@query_body}"
       doc = get_xml_doc(header)
       has_more = get_data_from_xml_doc(doc)
       #has_more = false
       beginIndex += pageSize
     end
+    write_to_csv
   end
+
+  def get_post_query
+    response = HTTParty.get(@url)
+    page_info_finder = PageInfoFinder.new
+    parser = Nokogiri::HTML::SAX::Parser.new(page_info_finder)
+    parser.parse(response.body)
+    @query_body = page_info_finder.query_body
+    #puts @query_body.inspect
+  end
+
+  
 
   def get_xml_doc(header) 
     5.times do
@@ -66,12 +75,13 @@ class ColesScraper
         price_node = node.xpath('.//div[@class="price"]')
         now = price_node.inner_text.match(/\$(\d+\.\d+)/)[1]
         original_node = node.xpath('.//div[@class="saving"]')
-        was = original_node.inner_text.match(/\$(\d+\.\d+)/)[1]
+        match = original_node.inner_text.match(/\$(\d+\.\d+)/)
+        was = match == nil ? 0 : match[1]
         social_node = node.xpath('.//div[@id="share"]')
         info = get_info_from_social_node(social_node)
-        @data.push({was:was, now:now}.merge(info)) if info != {}
+        @data.push({category: @category, was:was, now:now}.merge(info)) if info != {}
       rescue
-        LOGGER.error("find an exception node #{$!}")
+        LOGGER.error("find an exception in saving node #{$!}")
       end
     end
   end
@@ -83,9 +93,9 @@ class ColesScraper
         now = price_node.inner_text
         social_node = node.xpath('.//div[@id="share"]')
         info = get_info_from_social_node(social_node)
-        @data.push({was:0, now:now}.merge(info)) if info != {}
+        @data.push({category: @category, was:0, now:now}.merge(info)) if info != {}
       rescue
-        LOGGER.error("find an exception node #{$!}")
+        LOGGER.error("find an exception in multibuy node #{$!}")
       end
     end
   end
@@ -105,8 +115,8 @@ class ColesScraper
       {}
   end
 
-  def write
-    CSV.open(File.join(File.dirname(__FILE__),'coles.csv'), "wb") do |csv|
+  def write_to_csv
+    CSV.open(File.join(File.dirname(__FILE__),'coles.csv'), "ab") do |csv|
       @data.each do |item|
         csv << item.values
       end

@@ -1,0 +1,85 @@
+{
+  "Bread and Bakery":
+  [ 
+    {"Coles" : "http://shop.coles.com.au/online/national/specials-offers/bread-bakery-specials-offers/fresh-specials-offers"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/bakery"}
+  ],
+  "Fruit and Vegetables":
+  [
+    {"Coles": "http://shop.coles.com.au/online/national/specials-offers/fruit-vegetables-specials-offers"}
+  ],
+  "Dairy, Eggs and Meals":
+  [
+    {"Coles": "http://shop.coles.com.au/online/national/specials-offers/dairy--eggs-meals-specials-offers"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/dairy"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/chilled"}
+  ],
+  "Frozen Food":
+  [
+    {"Coles": "http://shop.coles.com.au/online/national/specials-offers/frozen-specials-offers"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/frozen-food"}
+  ],
+  "Pet Care":
+  [
+    {"Coles": "http://shop.coles.com.au/online/national/specials-offers/pet-specials-offers"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/pet-care"}
+  ],
+  "House Hold":
+  [
+    {"Coles": "http://shop.coles.com.au/online/national/specials-offers/household-specials-offers"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/home-outdoor"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/household-cleaning"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/papergoods-wraps-bags"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/toiletries"}
+  ],
+  "Baby":
+  [
+    {"Coles": "http://shop.coles.com.au/online/national/specials-offers/baby-specials-offers"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/baby"}
+  ],
+  "Pantry":
+  [
+    {"Coles": "http://shop.coles.com.au/online/national/specials-offers/pantry-specials-offers"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/baking"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/biscuits-snacks"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/breakfast-foods"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/canned-packet-food"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/condiments"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/confectionery"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/cooking-seasoning-gravy"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/desserts"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/health-foods"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/international-food"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/jams-spreads"}
+  ],
+  "Health and Beauty":
+  [
+    {"Coles": "http://shop.coles.com.au/online/national/specials-offers/health-beauty-specials-offers"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/beauty"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/health-wellbeing"}
+  ],
+  "Drinks":
+  [
+    {"Coles": "http://shop.coles.com.au/online/national/specials-offers/drinks-specials-offers"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/drinks"}
+  ],
+  "Clothing":
+  [
+    {"Coles": "http://shop.coles.com.au/online/national/specials-offers/clothing-specials-offers"}
+  ],
+  "Liquor":
+  [
+    {"Coles": "http://shop.coles.com.au/online/national/specials-offers/liquor-specials-offers"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/beer-wine-spirits"}
+  ],
+  "Meat, Seafood and Deli":
+  [
+    {"Coles": "http://shop.coles.com.au/online/national/specials-offers/chilled-fresh-food-specials-offers"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/serviced-deli"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/meat"},
+    {"Woolies": "http://www2.woolworthsonline.com.au/Shop/BrowseSpecials/seafood"}
+  ]
+}
+
+
+
