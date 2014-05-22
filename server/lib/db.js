@@ -23,6 +23,8 @@ function Db(){
             else{
               connection.query( query, function(err, result) {
                   if (err) {
+                      console.log(err);
+                      console.log('query is ' + query);
                       deferred.reject(new Error(err));
                   } else {
                       deferred.resolve(result);
