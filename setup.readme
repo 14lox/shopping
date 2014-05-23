@@ -1,6 +1,17 @@
 #install ruby rails
 \curl -sSL https://get.rvm.io | bash -s stable --rails
 
+sudo apt-get install libxslt-dev libxml2-dev
+gem install httparty -N
+gem install nokogiri -N  -- --use-system-libraries
+gem install htmlentities -N
+
 #install mysql
 
 sudo apt-get install mysql-server
+
+
+sudo apt-get install python-software-properties python g++ make
+sudo add-apt-repository ppa:chris-lea/node.js
+sudo apt-get update
+sudo apt-get install nodejs npm
