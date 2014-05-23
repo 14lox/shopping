@@ -56,8 +56,7 @@ end
 delete_csv
 load_categories
 
-
-#SqlWritter.write
+SqlWritter.write
 
 
 
