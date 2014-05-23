@@ -1,0 +1,6 @@
+#install ruby rails
+\curl -sSL https://get.rvm.io | bash -s stable --rails
+
+#install mysql
+
+sudo apt-get install mysql-server
