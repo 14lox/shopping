@@ -13,10 +13,10 @@ class ColesCrawler
     @category = category
     @url = url
     @data = []
+    puts "created ColesCrawler with #{@url}"
   end
 
   def crawl
-    puts 'coles pending'; return
     get_post_query
 
     @data = []
@@ -27,7 +27,6 @@ class ColesCrawler
     while  has_more
       puts "beginIndex is #{beginIndex}, data count is #{data.length}"
       @query_body['beginIndex'] = beginIndex
-      puts "query_body is #{@query_body}"
       doc = get_xml_doc(header)
       has_more = get_data_from_xml_doc(doc)
       #has_more = false

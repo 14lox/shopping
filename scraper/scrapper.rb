@@ -32,7 +32,11 @@ def load_categories
     providers.each do | provider|
       provider.each do | name, url |
         crawler = get_crawler_by_name(name, category, url)
-        crawler.crawl
+        begin
+          crawler.crawl
+        rescue
+          console.log($!)
+        end
       end
     end
   end

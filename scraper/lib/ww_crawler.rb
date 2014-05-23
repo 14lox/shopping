@@ -9,13 +9,13 @@ class WwCrawler
     @category = category
     @url = url
     @data = []
+    puts "created WwCrawler with #{@url}"
   end
 
 
   def get_page_number
     response = HTTParty.get(@url)
     content = response.body
-    puts content
     #string search on <li class="page-ellipses">...</li>
     #        <li class="page-number">
     #            <a href="/Shop/Specials?page=192" class="_jumpTop">192</a>
@@ -35,8 +35,8 @@ class WwCrawler
     @data = []
     page_number = get_page_number
     (1..page_number).each do |n|
-      puts "Getting page #{n}, item count is #{@data.count} "
       url = @url + "?page=#{n}&_mode=ajax&_ajaxsource=content-panel";
+      puts "getting #{url}"
       response = HTTParty.get(url)
       doc = Nokogiri::XML::Document.parse(response.body)
       node = doc.root.xpath('.//div[@id="content-panel"]')
