@@ -78,7 +78,7 @@ class ColesCrawler
         was = match == nil ? 0 : match[1]
         social_node = node.xpath('.//div[@id="share"]')
         info = get_info_from_social_node(social_node)
-        @data.push({category: @category, was:was, now:now}.merge(info)) if info != {}
+        @data.push({was:was, now:now}.merge(info).merge({category: @category})) if info != {}
       rescue
         LOGGER.error("find an exception in saving node #{$!}")
       end
