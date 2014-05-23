@@ -47,6 +47,13 @@ def get_crawler_by_name(name, category, url)
   return WwCrawler.new(category, url) if name.downcase == "woolies"
   raise "cannot crawl #{name}"
 end
+
+def delete_csv
+  File.delete('./lib/coles.csv') if File.exist?('./lib/coles.csv')
+  File.delete('./lib/ww.csv') if File.exist?('./lib/ww.csv')
+end
+
+delete_csv
 load_categories
 
 
