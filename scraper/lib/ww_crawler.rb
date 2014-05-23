@@ -66,11 +66,11 @@ class WwCrawler
         was = original_price_node.inner_text.strip.match(/\$(\d+\.\d+)/)[1]
 
         info = {}
-        info[:category] = @category
         info[:was] = was   
         info[:now] = now   
         info[:img] = img
         info[:title] = name
+        info[:category] = @category
         @data.push(info)
       rescue
       end

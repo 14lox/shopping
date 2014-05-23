@@ -11,8 +11,8 @@ class SqlWritter
     now = row[1].to_f
     save = was == 0 ? 0 : ((was - now)/was * 100).ceil
     save == 0 ?
-        file.puts("insert into promotion.Current (supplierId, name, newPrice, oldPrice, save, link, img, startDate, endDate) values (#{supplier_id}, \"#{row[3]}\", \"#{row[1]}\", \"0\", 0, \"\", \"#{row[2]}\", \"2013/01/01\", \"2020/01/01\");")
-      : file.puts("insert into promotion.Current (supplierId, name, newPrice, oldPrice, save, link, img, startDate, endDate) values (#{supplier_id}, \"#{row[3]}\", \"$#{row[1]}\", \"was $#{row[0]}\", #{save}, \"\", \"#{row[2]}\", \"2013/01/01\", \"2020/01/01\");")
+        file.puts("insert into promotion.Current (supplierId, category, name, newPrice, oldPrice, save, link, img, startDate, endDate) values (#{supplier_id}, \"#{row[4]}\", \"#{row[3]}\", \"#{row[1]}\", \"0\", 0, \"\", \"#{row[2]}\", \"2013/01/01\", \"2020/01/01\");")
+      : file.puts("insert into promotion.Current (supplierId, category, name, newPrice, oldPrice, save, link, img, startDate, endDate) values (#{supplier_id}, \"#{row[4]}\", \"#{row[3]}\", \"$#{row[1]}\", \"was $#{row[0]}\", #{save}, \"\", \"#{row[2]}\", \"2013/01/01\", \"2020/01/01\");")
     rescue
       puts $!
   end
