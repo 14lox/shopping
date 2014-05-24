@@ -26,12 +26,13 @@ exports.post_query = function(req, res, next){
 			return;
 		}
 
-		Db.runQuery('SELECT supplierId, name, newPrice, oldPrice, save, img from Current where id in (' + _.pluck(result.matches, "id").join(',') + ');')
+		Db.runQuery('SELECT supplierId, category, name, newPrice, oldPrice, save, img from Current where id in (' + _.pluck(result.matches, "id").join(',') + ');')
 		.then(function(results){
 				results = results.sort(function(item1, item2){return item1.save - item2.save}).reverse();
 				results = results.map(function(r){ 
 					return {
 						"supplier" : helper.getSupplier(r.supplierId),
+						"category" : r.category,
 						"name" : r.name,
 						"newPrice" : r.newPrice,
 						"oldPrice" : r.oldPrice,
@@ -98,12 +99,13 @@ exports.topSavings = function(req, res, next){
 		return;
 	}
 
-	var query = 'SELECT supplierId, name, newPrice, oldPrice, save, img from Current order by save desc, newPrice desc limit 50 offset ' + offset;
+	var query = 'SELECT supplierId, category, name, newPrice, oldPrice, save, img from Current order by save desc, newPrice desc limit 50 offset ' + offset;
 	Db.runQuery(query)
 	.then(function(results){
 		var items = [];
 		_.each(results, function(item){items.push({
 			"supplier" : helper.getSupplier(item.supplierId),
+			"category" : item.category,
 			"name" : item.name,
 			"newPrice" : item.newPrice,
 			"oldPrice" : item.oldPrice,
@@ -137,12 +139,13 @@ generateQueryFunc = function(query){
 					return;
 				}
 
-				Db.runQuery('SELECT supplierId, name, newPrice, oldPrice, save, img from Current where id in (' + _.pluck(result.matches, "id").join(',') + ');')
+				Db.runQuery('SELECT supplierId, category, name, newPrice, oldPrice, save, img from Current where id in (' + _.pluck(result.matches, "id").join(',') + ');')
 				.then(function(results){
 						results = results.sort(function(item1, item2){return item1.save - item2.save}).reverse();
 						results = results.map(function(r){ 
 							return {
 								"supplier" : helper.getSupplier(r.supplierId),
+								"category" : r.category,
 								"name" : r.name,
 								"newPrice" : r.newPrice,
 								"oldPrice" : r.oldPrice,
