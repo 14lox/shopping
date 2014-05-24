@@ -9,7 +9,7 @@ var SphinxClient = require ("sphinxapi"),
 exports.post_query = function(req, res, next){
 	console.log('get query ' + req.body.query);
 	var cl = new SphinxClient();
-	cl.SetServer('54.253.248.42', 9312);
+	cl.SetServer('localhost', 9312);
 	cl.SetLimits(0, 50);
 	var query = req.body.query;
 
@@ -123,7 +123,7 @@ exports.serverMessage = function(req, res, next){
 generateQueryFunc = function(query){
 	return function(callback){
 		var cl = new SphinxClient();
-		cl.SetServer('54.253.248.42', 9312);
+		cl.SetServer('localhost', 9312);
 		cl.SetLimits(0, 50);
 		cl.Query(query, function(err, result) {
 				if(err){
