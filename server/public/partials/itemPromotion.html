@@ -28,7 +28,7 @@
 	<div class="wrap-list">
 		<div ng-repeat="category in categories">
 			<div class='category' ng-click="toggleDetailStyle(category)">
-				<span class='small'>{{groups[category].count}} promotions in</span> {{category}} <i class="fa fa-angle-double-down"></i>
+				<span class='small'>{{groups[category].length}} promotions in</span> {{category}} <i class="fa fa-angle-double-down"></i>
 			</div>
 			<ol class='savelist' style="display:{{detailStyle[category]}}">
 				<li ng-repeat="item in groups[category]">
