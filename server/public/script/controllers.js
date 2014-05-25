@@ -307,9 +307,6 @@ shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParam
 
     var init = function(){
       var obj = JSON.parse(localStorage[$scope.item]);
-      // $scope.list = _.filter(obj.saving, function(obj){
-      //   return activeSupplierService.isSupplierActive(obj['supplier']);
-      // });
 
       var list = _.filter(obj.saving, function(obj){
         return activeSupplierService.isSupplierActive(obj['supplier']);
@@ -318,10 +315,12 @@ shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParam
       $scope.groups = _.groupBy(list, 'category');
       $scope.categories = Object.keys($scope.groups);
 
-      if($scope.groups.length == 1)
-        $scope.detailStyle = {$scope.groups[0] : 'block'};
-      else
-        $scope.detailStyle = _.map($scope.groups, function(group) {{group: 'none'}});
+
+      if($scope.categories.length == 1){
+        $scope.detailStyle[$scope.categories[0]] = 'block';
+      }else{
+        _.each($scope.categories, function(c) {$scope.detailStyle[c] = 'none';});
+      }
     };
 
     init();
