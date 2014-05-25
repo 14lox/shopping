@@ -26,34 +26,39 @@
 	</div>
 	
 	<div class="wrap-list">
-		<ol class='savelist'>
-			<li ng-repeat="item in list">
-				<table border='0' width='100%' class='center'>
-					<tr>
-						<td width='45px'>
-							<span ng-class="item['supplier']">
-								<img ng-src= "/image/{{item['supplier']}}.png"></img>
-							</span>
-						</td>
-						<td>
-							<a href='' ng-click="showImg(item['img'])" >{{item["name"]}}</a>
-						</td>
-						<td width='55px'>
-							<div ng-if="item['save'] != 0"> 
-								<font size='0.8em' >{{item["oldPrice"]}}</font>
-							</div>
-							<div>
-								<span class="string_price">{{item["newPrice"]}}</span>
-							</div>
-							<div ng-if="item['save'] != 0">
-								<font size='1.8em' >{{item["save"]}}% off</font>
-							</div>
-						</td>
-						<td width='30px' ng-click="addToList(item)">
-							<img src='image/add.png'/>	
-						</td>
-				</table>
-			</li>
-		</ol>
+		<div ng-repeat="group in groups">
+			<div>
+				{{Object.keys(group)[0]}}
+			</div>
+			<ol class='savelist'>
+				<li ng-repeat="item in group[Object.keys(group)[0]]">
+					<table border='0' width='100%' class='center'>
+						<tr>
+							<td width='45px'>
+								<span ng-class="item['supplier']">
+									<img ng-src= "/image/{{item['supplier']}}.png"></img>
+								</span>
+							</td>
+							<td>
+								<a href='' ng-click="showImg(item['img'])" >{{item["name"]}}</a>
+							</td>
+							<td width='55px'>
+								<div ng-if="item['save'] != 0"> 
+									<font size='0.8em' >{{item["oldPrice"]}}</font>
+								</div>
+								<div>
+									<span class="string_price">{{item["newPrice"]}}</span>
+								</div>
+								<div ng-if="item['save'] != 0">
+									<font size='1.8em' >{{item["save"]}}% off</font>
+								</div>
+							</td>
+							<td width='30px' ng-click="addToList(item)">
+								<img src='image/add.png'/>	
+							</td>
+					</table>
+				</li>
+			</ol>
+		</div>
 	</div>
 </div>

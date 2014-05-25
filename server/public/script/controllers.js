@@ -300,9 +300,15 @@ shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParam
 
     var init = function(){
       var obj = JSON.parse(localStorage[$scope.item]);
-      $scope.list = _.filter(obj.saving, function(obj){
+      // $scope.list = _.filter(obj.saving, function(obj){
+      //   return activeSupplierService.isSupplierActive(obj['supplier']);
+      // });
+
+      list = _.filter(obj.saving, function(obj){
         return activeSupplierService.isSupplierActive(obj['supplier']);
       });
+
+      $scope.groups = _.groupBy(list, 'category')
     };
 
     init();
