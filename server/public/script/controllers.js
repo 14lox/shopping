@@ -315,7 +315,7 @@ shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParam
       $scope.groups = _.groupBy(list, 'category');
       $scope.categories = Object.keys($scope.groups);
 
-
+      $scope.detailStyle = {};
       if($scope.categories.length == 1){
         $scope.detailStyle[$scope.categories[0]] = 'block';
       }else{

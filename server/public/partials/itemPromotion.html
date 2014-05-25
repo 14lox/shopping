@@ -30,7 +30,7 @@
 			<div class='catetory' ng-click="toggleDetailStyle(category)">
 				{{category}}
 			</div>
-			<ol class='savelist' style="display:{{detailStyle['category']}}">
+			<ol class='savelist' style="display:{{detailStyle[category]}}">
 				<li ng-repeat="item in groups[category]">
 					<table border='0' width='100%' class='center'>
 						<tr>
