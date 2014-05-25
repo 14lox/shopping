@@ -230,6 +230,15 @@ a.saving:hover{
   list-style: none;
 }
 
+.category{
+  height: 45px;
+  font-size: 22px;
+  text-align: center;
+  background-color: rgb(153, 155, 108);
+  vertical-align: middle;
+  padding-top: 20px;
+}
+
 .remove{
   margin-top: -32px;
   padding-right: 10px;
