@@ -26,12 +26,12 @@
 	</div>
 	
 	<div class="wrap-list">
-		<div ng-repeat="group in groups">
+		<div ng-repeat="category in categories">
 			<div>
-				{{Object.keys(group)[0]}}
+				{{category}}
 			</div>
 			<ol class='savelist'>
-				<li ng-repeat="item in group[Object.keys(group)[0]]">
+				<li ng-repeat="item in groups[category]">
 					<table border='0' width='100%' class='center'>
 						<tr>
 							<td width='45px'>

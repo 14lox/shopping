@@ -304,11 +304,12 @@ shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParam
       //   return activeSupplierService.isSupplierActive(obj['supplier']);
       // });
 
-      list = _.filter(obj.saving, function(obj){
+      var list = _.filter(obj.saving, function(obj){
         return activeSupplierService.isSupplierActive(obj['supplier']);
       });
 
-      $scope.groups = _.groupBy(list, 'category')
+      $scope.groups = _.groupBy(list, 'category');
+      $scope.categories = Object.keys($scope.groups);
     };
 
     init();
