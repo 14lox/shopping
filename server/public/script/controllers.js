@@ -297,6 +297,13 @@ shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParam
       $window.location.href = url;
     }
 
+    $scope.toggleDetailStyle = function(category){
+      if($scope.detailStyle[category] == 'none')
+        $scope.detailStyle[category] = 'block';
+      else
+        $scope.detailStyle[category] = 'none';
+    }
+
 
     var init = function(){
       var obj = JSON.parse(localStorage[$scope.item]);
@@ -310,6 +317,11 @@ shoppingAppControllers.controller('PromotionDetailCtrl', ['$scope', '$routeParam
 
       $scope.groups = _.groupBy(list, 'category');
       $scope.categories = Object.keys($scope.groups);
+
+      if($scope.groups.length == 1)
+        $scope.detailStyle = {$scope.groups[0] : 'block'};
+      else
+        $scope.detailStyle = _.map($scope.groups, function(group) {{group: 'none'}});
     };
 
     init();

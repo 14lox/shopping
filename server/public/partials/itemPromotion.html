@@ -26,11 +26,11 @@
 	</div>
 	
 	<div class="wrap-list">
-		<div ng-repeat="category in categories" class='catetory'>
-			<div>
+		<div ng-repeat="category in categories">
+			<div class='catetory' ng-click="toggleDetailStyle(category)">
 				{{category}}
 			</div>
-			<ol class='savelist'>
+			<ol class='savelist' style="display:{{detailStyle['category']}}">
 				<li ng-repeat="item in groups[category]">
 					<table border='0' width='100%' class='center'>
 						<tr>
